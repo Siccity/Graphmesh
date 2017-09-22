@@ -18,8 +18,8 @@ namespace Graphmesh {
             base.OnInspectorGUI();
             MeshModifier modifier = target as MeshModifier;
 
-            if (modifier.graphAsset != null) {
-                List<GraphmeshNode> inputNodes = GetGraphMeshNodes(modifier.graphAsset.nodeGraph);
+            if (modifier.nodeGraph != null) {
+                List<GraphmeshNode> inputNodes = GetGraphMeshNodes(modifier.nodeGraph);
 
                 for (int i = 0; i < inputNodes.Count; i++) {
                     GraphmeshNode node = inputNodes[i];

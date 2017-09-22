@@ -9,7 +9,7 @@ namespace Graphmesh {
         /// <summary> Manual input for the graph. </summary>
         public NodeCache inputCache = new NodeCache();
 
-        public NodeGraphAsset graphAsset;
+        public NodeGraph nodeGraph;
         //public Transform template;
         public bool singleMesh;
         public bool generateLightmapUVs;
@@ -18,7 +18,7 @@ namespace Graphmesh {
         public void Generate() {
             //We traverse backwards
 
-            OutputModel[] outputNodes = graphAsset.nodeGraph.nodes.FindAll(x => x.GetType() == typeof(OutputModel)).ConvertAll(x => x as OutputModel).ToArray();
+            OutputModel[] outputNodes = nodeGraph.nodes.FindAll(x => x.GetType() == typeof(OutputModel)).ConvertAll(x => x as OutputModel).ToArray();
 
             GraphmeshNode.currentOutputCache = outputCache;
             GraphmeshNode.currentInputCache = inputCache;
