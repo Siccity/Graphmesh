@@ -6,14 +6,12 @@ using UnityEngine;
 namespace Graphmesh {
     public class InputModel : GraphmeshNode {
 
+        [Input] public GameObject input;
+        [Output] public List<Model> output;
         public override Type[] ExposedInputs { get { return new Type[1] { typeof(GameObject) }; } }
 
         protected override void Init() {
             name = "Input Model";
-            inputs = new NodePort[1];
-            inputs[0] = CreateNodeInput("GameObject", typeof(GameObject));
-            outputs = new NodePort[1];
-            outputs[0] = CreateNodeOutput("Model", typeof(List<Model>));
         }
 
         private List<Model> ModelsFromGameObjects(Transform root) {

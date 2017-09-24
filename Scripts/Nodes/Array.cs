@@ -3,18 +3,17 @@ using System.Collections.Generic;
 
 namespace Graphmesh {
     public class Array : GraphmeshNode {
+
+        [Input] public List<Model> model;
+        [Input] public Bezier3DSpline spline;
+        [Output] public List<Model> output;
+
         public int count;
         public Vector3 posOffset;
         public Vector3 rotOffset;
         public enum LengthFitMethod { RoundUp, RoundDown, ScaleUp, ScaleDown, Cut}
         protected override void Init() {
             name = "Array Modifier";
-            inputs = new NodePort[2];
-            inputs[0] = CreateNodeInput("Model", typeof(List<Model>));
-            inputs[1] = CreateNodeInput("Spline", typeof(List<Model>));
-
-            outputs = new NodePort[1];
-            outputs[0] = CreateNodeOutput("Model", typeof(List<Model>));
         }
 
         public override object GenerateOutput(int outputIndex, object[][] inputs) {

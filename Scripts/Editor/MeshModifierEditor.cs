@@ -27,7 +27,7 @@ namespace Graphmesh {
 
                         Object obj = modifier.inputCache.GetCachedObject(node, k) as Object;
                         EditorGUI.BeginChangeCheck();
-                        obj = EditorGUILayout.ObjectField(node.name + " " + k, obj, node.ExposedInputs[k], true);
+                        obj = EditorGUILayout.ObjectField(node.GetType().Name + " " + k, obj, node.ExposedInputs[k], true);
                         if (obj is Component) {
                             Component c = obj as Component;
                             GameObject go = c.gameObject;

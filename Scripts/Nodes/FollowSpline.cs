@@ -4,6 +4,9 @@ using System.Collections.Generic;
 namespace Graphmesh {
     public class FollowSpline : GraphmeshNode {
 
+        [Input] public List<Model> model;
+        [Input] public Bezier3DSpline spline;
+        [Output] public List<Model> output;
         public enum Axis {
             x = 0,
             y = 1,
@@ -13,14 +16,6 @@ namespace Graphmesh {
 
         protected override void Init() {
             name = "Follow Spline";
-
-            inputs = new NodePort[2];
-            inputs[0] = CreateNodeInput("Model", typeof(List<Model>));
-            inputs[1] = CreateNodeInput("Spline", typeof(Bezier3DSpline));
-
-            outputs = new NodePort[1];
-            outputs[0] = CreateNodeOutput("Model", typeof(List<Model>));
-
         }
 
         public override object GenerateOutput(int outputIndex, object[][] inputs) {

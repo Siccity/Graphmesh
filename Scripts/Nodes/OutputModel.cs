@@ -7,9 +7,8 @@ namespace Graphmesh {
 
         protected override void Init() {
             name = "Output Model";
-            inputs = new NodePort[1];
-            inputs[0] = CreateNodeInput("Model", typeof(List<Model>));
         }
+        [Input] public List<Model> model;
 
         public List<Model> GetModels() {
             return GetOutputValue(0) as List<Model>;

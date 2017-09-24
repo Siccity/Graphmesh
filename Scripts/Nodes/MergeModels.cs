@@ -6,13 +6,9 @@ namespace Graphmesh {
 
         protected override void Init() {
             name = "Array Modifier";
-
-            inputs = new NodePort[1];
-            inputs[0] = CreateNodeInput("Model", typeof(List<Model>));
-
-            outputs = new NodePort[1];
-            outputs[0] = CreateNodeOutput("Model", typeof(List<Model>));
         }
+        [Input] public List<Model> input = new List<Model>();
+        [Output] public List<Model> output = new List<Model>();
 
         public override object GenerateOutput(int outputIndex, object[][] inputs) {
 
