@@ -23,7 +23,7 @@ namespace Graphmesh {
                         inputs[i] = new object[1] { currentInputCache.GetCachedObject(this, i) };
                     }
                     else {
-                        NodePort input = GetInput(i);
+                        NodePort input = base.inputs[i];
                         if (input == null || !input.IsConnected) {
                             inputs[i] = null;
                         }

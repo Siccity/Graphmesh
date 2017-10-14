@@ -7,8 +7,8 @@ namespace Graphmesh {
         protected override void Init() {
             name = "Array Modifier";
         }
-        [Input] public List<Model> input = new List<Model>();
-        [Output] public List<Model> output = new List<Model>();
+        [Input(false)] public List<Model> input = new List<Model>();
+        [Output(false)] public List<Model> output = new List<Model>();
 
         public override object GenerateOutput(int outputIndex, object[][] inputs) {
 

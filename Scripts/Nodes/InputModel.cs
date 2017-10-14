@@ -6,8 +6,8 @@ using UnityEngine;
 namespace Graphmesh {
     public class InputModel : GraphmeshNode {
 
-        [Input] public GameObject input;
-        [Output] public List<Model> output;
+        [Input(false)] public GameObject input;
+        [Output(false)] public List<Model> output;
         public override Type[] ExposedInputs { get { return new Type[1] { typeof(GameObject) }; } }
 
         protected override void Init() {

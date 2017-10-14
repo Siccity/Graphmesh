@@ -6,8 +6,8 @@ using UnityEngine;
 namespace Graphmesh {
     public class InputSpline : GraphmeshNode {
 
-        [Input] public Bezier3DSpline input;
-        [Output] public Bezier3DSpline output;
+        [Input(false)] public Bezier3DSpline input;
+        [Output(false)] public Bezier3DSpline output;
         public override Type[] ExposedInputs { get { return new Type[1] { typeof(Bezier3DSpline) }; } }
 
         protected override void Init() {

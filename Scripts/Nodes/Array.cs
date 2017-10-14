@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace Graphmesh {
     public class Array : GraphmeshNode {
 
-        [Input] public List<Model> model;
-        [Input] public Bezier3DSpline spline;
-        [Output] public List<Model> output;
+        [Input(false)] public List<Model> model;
+        [Input(false)] public Bezier3DSpline spline;
+        [Output(false)] public List<Model> output;
 
         public int count;
         public Vector3 posOffset;

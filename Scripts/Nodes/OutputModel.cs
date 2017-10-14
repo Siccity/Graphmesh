@@ -8,7 +8,7 @@ namespace Graphmesh {
         protected override void Init() {
             name = "Output Model";
         }
-        [Input] public List<Model> model;
+        [Input(false)] public List<Model> model;
 
         public List<Model> GetModels() {
             return GetOutputValue(0) as List<Model>;
