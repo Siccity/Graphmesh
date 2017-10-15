@@ -11,8 +11,8 @@ namespace Graphmesh {
         static MeshModifierEditor() {
             Bezier3DSplineEditor.onUpdateSpline -= OnUpdateSpline;
             Bezier3DSplineEditor.onUpdateSpline += OnUpdateSpline;
-            //NodeEditor.onNodeGuiChange -= OnUpdateNode;
-            //NodeEditor.onNodeGuiChange += OnUpdateNode;
+            NodeEditor.onUpdateNode -= OnUpdateNode;
+            NodeEditor.onUpdateNode += OnUpdateNode;
         }
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
@@ -60,13 +60,13 @@ namespace Graphmesh {
             }
         }
 
-        /*static void OnUpdateNode(NodeGraphAsset graph, Node node) {
+        static void OnUpdateNode(Node node) {
             MeshModifier[] meshModifiers = FindObjectsOfType<MeshModifier>();
             for (int i = 0; i < meshModifiers.Length; i++) {
-                if (meshModifiers[i].graph == graph) {
+                if (meshModifiers[i].nodeGraph == node.graph) {
                     meshModifiers[i].Generate();
                 }
             }
-        }*/
+        }
     }
 }

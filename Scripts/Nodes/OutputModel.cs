@@ -5,10 +5,11 @@ using UnityEngine;
 namespace Graphmesh {
     public class OutputModel : GraphmeshNode {
 
+        [Input(false)] public List<Model> model;
+
         protected override void Init() {
             name = "Output Model";
         }
-        [Input(false)] public List<Model> model;
 
         public List<Model> GetModels() {
             return GetOutputValue(0) as List<Model>;
