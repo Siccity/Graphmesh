@@ -7,22 +7,19 @@ namespace Graphmesh {
 
         [Input(false)] public List<Model> model;
 
-        protected override void Init() {
-            name = "Output Model";
-        }
-
         public List<Model> GetModels() {
-            return GetOutputValue(0) as List<Model>;
+
+            NodePort modelPort = GetInputByFieldName("model");
+            return GetValue(modelPort) as List<Model>;
         }
 
-        public override object GenerateOutput(int outputIndex, object[][] inputs) {
-            List<Model> models = UnpackModels(0, inputs);
-
+        public override object GenerateOutput(NodePort port) {
+            List<Model> models = GetModelList(GetInputByFieldName("model"));
             for (int i = 0; i < models.Count; i++) {
                 models[i].mesh.RecalculateBounds();
             }
 
-            return UnpackModels(0, inputs);
+            return models;
         }
     }
 }

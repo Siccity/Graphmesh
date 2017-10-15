@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Graphmesh {
     public class FollowSpline : GraphmeshNode {
@@ -9,8 +9,8 @@ namespace Graphmesh {
         [Output(false)] public List<Model> output;
         public enum Axis {
             x = 0,
-            y = 1,
-            z = 2
+                y = 1,
+                z = 2
         }
         public Axis axis = Axis.z;
 
@@ -18,20 +18,21 @@ namespace Graphmesh {
             name = "Follow Spline";
         }
 
-        public override object GenerateOutput(int outputIndex, object[][] inputs) {
-            List<Model> input = UnpackModels(0, inputs);
-            Bezier3DSpline spline = inputs[1][0] as Bezier3DSpline;
+        public override object GenerateOutput(NodePort port) {
+            List<Model> input = GetModelList(GetInputByFieldName("model"));
+            NodePort splinePort = GetPortByFieldName("spline");
+            Bezier3DSpline spline = splinePort.Connection.GetValue() as Bezier3DSpline;
 
             if (spline == null) Debug.Log("Spline is null");
 
             for (int i = 0; i < input.Count; i++) {
-                FollowCurve(input[i],spline);
+                FollowCurve(input[i], spline);
             }
             return input;
         }
 
         private void FollowCurve(Model model, Bezier3DSpline spline) {
-            int axis = (int)this.axis;
+            int axis = (int) this.axis;
             Vector3[] verts = model.mesh.vertices;
             Vector3[] norms = model.mesh.normals;
             Vector4[] tan = model.mesh.tangents;

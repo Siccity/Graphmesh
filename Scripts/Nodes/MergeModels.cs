@@ -11,11 +11,9 @@ namespace Graphmesh {
             name = "Array Modifier";
         }
 
-        public override object GenerateOutput(int outputIndex, object[][] inputs) {
-
-            List<Model> input = UnpackModels(0, inputs);
+        public override object GenerateOutput(NodePort port) {
+            List<Model> inputModels = GetModelList(GetInputByFieldName("input"));
             return new List<Model>() { Model.CombineModels(input) };
-
         }
     }
 }

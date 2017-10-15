@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Graphmesh {
     public class Array : GraphmeshNode {
@@ -11,29 +11,23 @@ namespace Graphmesh {
         public int count;
         public Vector3 posOffset;
         public Vector3 rotOffset;
-        public enum LengthFitMethod { RoundUp, RoundDown, ScaleUp, ScaleDown, Cut}
-        protected override void Init() {
-            name = "Array Modifier";
-        }
+        public enum LengthFitMethod { RoundUp, RoundDown, ScaleUp, ScaleDown, Cut }
 
-        public override object GenerateOutput(int outputIndex, object[][] inputs) {
+        public override object GenerateOutput(NodePort port) {
+            NodePort splinePort = GetPortByFieldName("spline");
+            Bezier3DSpline spline = splinePort.Connection.GetValue() as Bezier3DSpline;
 
-            List<Model> input = UnpackModels(0, inputs);
-            Bezier3DSpline spline = null;
-            bool fit = true;
-            if (inputs[1] != null && inputs[1].Length != 0) {
-                spline = inputs[1][0] as Bezier3DSpline;
-            }
+            List<Model> inputModels = GetModelList(GetInputByFieldName("model"));
             List<Model> output = new List<Model>();
 
             if (spline != null) count = GetCount(spline);
 
             //Loop through input models
-            for (int i = 0; i < input.Count; i++) {
-                CombineInstance[] finalCombines = new CombineInstance[input[i].mesh.subMeshCount];
+            for (int i = 0; i < inputModels.Count; i++) {
+                CombineInstance[] finalCombines = new CombineInstance[inputModels[i].mesh.subMeshCount];
 
                 //Loop through model submeshes
-                for (int g = 0; g < input[i].mesh.subMeshCount; g++) {
+                for (int g = 0; g < inputModels[i].mesh.subMeshCount; g++) {
                     //Create a CombineInstance array for the submesh
                     CombineInstance[] submeshCombines = new CombineInstance[count];
 
@@ -62,7 +56,7 @@ namespace Graphmesh {
 
                         //Setup CombineInstance
                         submeshCombines[k] = new CombineInstance() {
-                            mesh = input[i].mesh,
+                            mesh = inputModels[i].mesh,
                             transform = Matrix4x4.TRS(pos, Quaternion.Euler(rot), scale),
                             subMeshIndex = g
                         };
@@ -76,7 +70,7 @@ namespace Graphmesh {
                 }
                 Mesh finalMesh = new Mesh();
                 finalMesh.CombineMeshes(finalCombines, false);
-                output.Add(new Model(finalMesh, input[i].materials));
+                output.Add(new Model(finalMesh, inputModels[i].materials));
             }
             return output;
         }

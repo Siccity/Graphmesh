@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 namespace Graphmesh {
     [InitializeOnLoad]
     [CustomEditor(typeof(MeshModifier))]
     public class MeshModifierEditor : Editor {
+
+        public static bool displayDefaultInspector;
 
         static MeshModifierEditor() {
             Bezier3DSplineEditor.onUpdateSpline -= OnUpdateSpline;
@@ -14,33 +17,38 @@ namespace Graphmesh {
             NodeEditor.onUpdateNode -= OnUpdateNode;
             NodeEditor.onUpdateNode += OnUpdateNode;
         }
+
         public override void OnInspectorGUI() {
-            base.OnInspectorGUI();
+
             MeshModifier modifier = target as MeshModifier;
 
+            modifier.nodeGraph = EditorGUILayout.ObjectField("Node Graph", modifier.nodeGraph, typeof(GraphmeshNodeGraph), true) as GraphmeshNodeGraph;
+
+            //Display exposed inputs
             if (modifier.nodeGraph != null) {
-                List<GraphmeshNode> inputNodes = GetGraphMeshNodes(modifier.nodeGraph);
+                //Get all exposed inputs
+                ExposedInput[] inputNodes = modifier.nodeGraph.nodes.Where(x => x is ExposedInput).Select(x => x as ExposedInput).ToArray();
 
-                for (int i = 0; i < inputNodes.Count; i++) {
-                    GraphmeshNode node = inputNodes[i];
-                    for (int k = 0; k < node.ExposedInputs.Length; k++) {
+                for (int i = 0; i < inputNodes.Length; i++) {
+                    ExposedInput inputNode = inputNodes[i];
+                    System.Type inputType = inputNode.GetOutputType();
 
-                        Object obj = modifier.inputCache.GetCachedObject(node, k) as Object;
-                        EditorGUI.BeginChangeCheck();
-                        obj = EditorGUILayout.ObjectField(node.GetType().Name + " " + k, obj, node.ExposedInputs[k], true);
-                        if (obj is Component) {
-                            Component c = obj as Component;
-                            GameObject go = c.gameObject;
-                            if (go == modifier.gameObject) {
-                            }
-                        }
+                    //If inputType is null, it means the ExposedInput node isn't connected. Don't display it.
+                    if (inputType == null) continue;
 
-                        if (EditorGUI.EndChangeCheck()) {
-                            modifier.inputCache.Cache(node, obj, k);
-                        }
+                    Object obj = modifier.outputCache.GetCachedObject(inputNode, "value") as Object;
+                    EditorGUI.BeginChangeCheck();
+                    obj = EditorGUILayout.ObjectField(inputNode.label, obj, inputNode.GetOutputType(), true);
+
+                    if (EditorGUI.EndChangeCheck()) {
+                        modifier.outputCache.Cache(inputNode, obj, "value");
                     }
                 }
             }
+            GUILayout.Space(20);
+
+            displayDefaultInspector = EditorGUILayout.Toggle("Default Inspector", displayDefaultInspector);
+            if (displayDefaultInspector) base.OnInspectorGUI();
         }
 
         List<GraphmeshNode> GetGraphMeshNodes(NodeGraph graph) {
@@ -54,7 +62,7 @@ namespace Graphmesh {
         static void OnUpdateSpline(Bezier3DSpline spline) {
             MeshModifier[] meshModifiers = FindObjectsOfType<MeshModifier>();
             for (int i = 0; i < meshModifiers.Length; i++) {
-                if (meshModifiers[i].inputCache.Contains(spline)) {
+                if (meshModifiers[i].outputCache.Contains(spline)) {
                     meshModifiers[i].Generate();
                 }
             }

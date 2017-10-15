@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Graphmesh { 
+namespace Graphmesh {
     public class MeshModifier : MonoBehaviour {
         /// <summary> Automatically generated and managed. Reuses node outputs. </summary>
         public NodeCache outputCache = new NodeCache();
-        /// <summary> Manual input for the graph. </summary>
-        public NodeCache inputCache = new NodeCache();
 
         public NodeGraph nodeGraph;
         //public Transform template;
@@ -21,7 +19,6 @@ namespace Graphmesh {
             OutputModel[] outputNodes = nodeGraph.nodes.FindAll(x => x.GetType() == typeof(OutputModel)).ConvertAll(x => x as OutputModel).ToArray();
 
             GraphmeshNode.currentOutputCache = outputCache;
-            GraphmeshNode.currentInputCache = inputCache;
 
             List<Model> models = new List<Model>();
             for (int i = 0; i < outputNodes.Length; i++) {
@@ -30,14 +27,12 @@ namespace Graphmesh {
             }
             if (models == null) {
                 Debug.LogWarning("Error in mesh generation");
-            }
-            else {
+            } else {
                 ClearMesh();
                 if (models.Count == 1) ShowModel(gameObject, models[0]);
                 else ShowModels(models);
             }
         }
-
 
         private void ShowModel(GameObject target, Model model) {
             MeshFilter filter = target.AddComponent<MeshFilter>();
@@ -52,7 +47,7 @@ namespace Graphmesh {
         }
         private void ShowModels(List<Model> models) {
             for (int i = 0; i < models.Count; i++) {
-                GameObject go = new GameObject("mesh output "+i);
+                GameObject go = new GameObject("mesh output " + i);
                 go.transform.parent = transform;
                 go.transform.localPosition = Vector3.zero;
                 go.transform.localRotation = Quaternion.identity;
@@ -70,8 +65,7 @@ namespace Graphmesh {
             DestroyImmediate(GetComponent<MeshFilter>());
         }
 
-        void OnEnable() {
-        }
+        void OnEnable() { }
     }
 
     public static class ExtensionMethods {
@@ -79,12 +73,12 @@ namespace Graphmesh {
         public static Mesh Copy(this Mesh mesh) {
             return new Mesh() {
                 vertices = mesh.vertices,
-                triangles = mesh.triangles,
-                uv = mesh.uv,
-                uv2 = mesh.uv2,
-                normals = mesh.normals,
-                tangents = mesh.tangents,
-                colors = mesh.colors
+                    triangles = mesh.triangles,
+                    uv = mesh.uv,
+                    uv2 = mesh.uv2,
+                    normals = mesh.normals,
+                    tangents = mesh.tangents,
+                    colors = mesh.colors
             };
         }
 
@@ -93,13 +87,13 @@ namespace Graphmesh {
             Mesh[] meshes = new Mesh[mesh.Length];
             for (int i = 0; i < meshes.Length; i++) {
                 meshes[i] = new Mesh() {
-                    vertices = mesh[i].vertices,
-                    triangles = mesh[i].triangles,
-                    uv = mesh[i].uv,
-                    uv2 = mesh[i].uv2,
-                    normals = mesh[i].normals,
-                    tangents = mesh[i].tangents,
-                    colors = mesh[i].colors
+                vertices = mesh[i].vertices,
+                triangles = mesh[i].triangles,
+                uv = mesh[i].uv,
+                uv2 = mesh[i].uv2,
+                normals = mesh[i].normals,
+                tangents = mesh[i].tangents,
+                colors = mesh[i].colors
                 };
             }
             return meshes;

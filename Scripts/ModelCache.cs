@@ -7,16 +7,16 @@ namespace Graphmesh {
     public class NodeCache { 
         [SerializeField] private List<Item> items;
 
-        public void Cache(Node node, UnityEngine.Object value, int portIndex) {
-            Item item = GetItem(node, portIndex);
-            if (item == null) items.Add(new Item(node, value, portIndex));
+        public void Cache(Node node, UnityEngine.Object value, string portName) {
+            Item item = GetItem(node, portName);
+            if (item == null) items.Add(new Item(node, value, portName));
             else {
                 item.value = value;
             }
         }
 
-        public UnityEngine.Object GetCachedObject (Node node, int portIndex) {
-            Item item = GetItem(node, portIndex);
+        public UnityEngine.Object GetCachedObject (Node node, string portName) {
+            Item item = GetItem(node, portName);
             if (item == null) {
                 return null;
             }
@@ -31,23 +31,23 @@ namespace Graphmesh {
         }
 
 
-        private Item GetItem(Node node, int portIndex) {
+        private Item GetItem(Node node, string portName) {
             for (int i = 0; i < items.Count; i++) {
-                if (items[i].node == node && items[i].portIndex == portIndex) return items[i];
+                if (items[i].node == node && items[i].portName == portName) return items[i];
             }
             return null;
         }
 
         [Serializable]
         private class Item {
-            public Item(Node node, UnityEngine.Object value, int portIndex) {
+            public Item(Node node, UnityEngine.Object value, string portName) {
                 this.node = node;
                 this.value = value;
-                this.portIndex = portIndex;
+                this.portName = portName;
             }
 
             public Node node;
-            public int portIndex;
+            public string portName;
             public UnityEngine.Object value;
         }
     }
