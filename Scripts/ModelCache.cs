@@ -5,7 +5,7 @@ using System;
 namespace Graphmesh {
     [Serializable]
     public class NodeCache { 
-        [SerializeField] private List<Item> items;
+        [SerializeField] private List<Item> items = new List<Item>();
 
         public void Cache(Node node, UnityEngine.Object value, string portName) {
             Item item = GetItem(node, portName);
