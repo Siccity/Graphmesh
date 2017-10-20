@@ -21,7 +21,7 @@ namespace Graphmesh {
         public override object GenerateOutput(NodePort port) {
             List<Model> input = GetModelList(GetInputByFieldName("model"));
             NodePort splinePort = GetPortByFieldName("spline");
-            Bezier3DSpline spline = splinePort.Connection.GetValue() as Bezier3DSpline;
+            Bezier3DSpline spline = splinePort.Connection.GetOutputValue() as Bezier3DSpline;
 
             if (spline == null) Debug.Log("Spline is null");
 

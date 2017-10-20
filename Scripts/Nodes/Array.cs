@@ -14,8 +14,7 @@ namespace Graphmesh {
         public enum LengthFitMethod { RoundUp, RoundDown, ScaleUp, ScaleDown, Cut }
 
         public override object GenerateOutput(NodePort port) {
-            NodePort splinePort = GetPortByFieldName("spline");
-            Bezier3DSpline spline = splinePort.Connection.GetValue() as Bezier3DSpline;
+            Bezier3DSpline spline = GetPortByFieldName("spline").GetInputValue<Bezier3DSpline>();
 
             List<Model> inputModels = GetModelList(GetInputByFieldName("model"));
             List<Model> output = new List<Model>();
