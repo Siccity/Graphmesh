@@ -5,21 +5,25 @@ namespace Graphmesh {
     public class Array : GraphmeshNode {
 
         [Input(false)] public List<Model> model;
-        [Input(false)] public Bezier3DSpline spline;
         [Output(false)] public List<Model> output;
 
-        public int count;
+        public bool fitLength;
+        [Input(true)] public float length;
+        [Input(true)] public int count;
         public Vector3 posOffset;
         public Vector3 rotOffset;
         public enum LengthFitMethod { RoundUp, RoundDown, ScaleUp, ScaleDown, Cut }
 
         public override object GenerateOutput(NodePort port) {
-            Bezier3DSpline spline = GetPortByFieldName("spline").GetInputValue<Bezier3DSpline>();
 
             List<Model> inputModels = GetModelList(GetInputByFieldName("model"));
             List<Model> output = new List<Model>();
 
-            if (spline != null) count = GetCount(spline);
+            float length = this.length;
+            if (fitLength) {
+                length = GetInputByFieldName("length").GetInputSum(this.length);
+                count = GetCount(length);
+            }
 
             //Loop through input models
             for (int i = 0; i < inputModels.Count; i++) {
@@ -36,9 +40,9 @@ namespace Graphmesh {
                         Vector3 rot = rotOffset * k;
                         Vector3 scale = Vector3.one;
 
-                        if (spline != null) {
+                        if (fitLength) {
                             float segmentWidth = posOffset.magnitude; //eg 4
-                            float lengthToFit = spline.totalLength; //eg 11.12041
+                            float lengthToFit = length; //eg 11.12041
                             float fitScale = lengthToFit / (segmentWidth * count); //eg 1.390052
                             Vector3 fitAxis = posOffset / segmentWidth; //eg (0,0,1)
                             Vector3 fitScaleOffset = fitAxis * fitScale; //eg (0,0,1.390052)
@@ -74,8 +78,8 @@ namespace Graphmesh {
             return output;
         }
 
-        int GetCount(Bezier3DSpline spline) {
-            int fittedCount = LengthToCount(spline.totalLength);
+        int GetCount(float length) {
+            int fittedCount = LengthToCount(length);
             return fittedCount;
             //return Mathf.Clamp(fittedCount + count, 0, GetMaxCount());
         }
