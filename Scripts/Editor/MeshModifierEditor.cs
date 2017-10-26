@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Graphmesh {
     [InitializeOnLoad]
-    [CustomEditor(typeof(MeshModifier))]
+    [CustomEditor(typeof(Graphmesh))]
     public class MeshModifierEditor : Editor {
 
         public static bool displayDefaultInspector;
@@ -20,7 +20,7 @@ namespace Graphmesh {
 
         public override void OnInspectorGUI() {
 
-            MeshModifier modifier = target as MeshModifier;
+            Graphmesh modifier = target as Graphmesh;
 
             modifier.nodeGraph = EditorGUILayout.ObjectField("Node Graph", modifier.nodeGraph, typeof(GraphmeshNodeGraph), true) as GraphmeshNodeGraph;
 
@@ -60,7 +60,7 @@ namespace Graphmesh {
         }
 
         static void OnUpdateSpline(Bezier3DSpline spline) {
-            MeshModifier[] meshModifiers = FindObjectsOfType<MeshModifier>();
+            Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh>();
             for (int i = 0; i < meshModifiers.Length; i++) {
                 if (meshModifiers[i].outputCache.Contains(spline)) {
                     meshModifiers[i].Generate();
@@ -69,7 +69,7 @@ namespace Graphmesh {
         }
 
         static void OnUpdateNode(Node node) {
-            MeshModifier[] meshModifiers = FindObjectsOfType<MeshModifier>();
+            Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh>();
             for (int i = 0; i < meshModifiers.Length; i++) {
                 if (meshModifiers[i].nodeGraph == node.graph) {
                     meshModifiers[i].Generate();

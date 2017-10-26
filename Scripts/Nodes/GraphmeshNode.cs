@@ -13,23 +13,8 @@ namespace Graphmesh {
             //Try to return a cached object
             object output = currentOutputCache.GetCachedObject(this, port.fieldName);
             if (output != null) return output;
-
-            //If no cached objects are found, get all inputs and try to generate one.
-            /*object[][] inputData = new object[InputCount][];
-            for (int i = 0; i < InputCount; i++) {
-                NodePort input = base.inputs[i];
-                if (input == null || !input.IsConnected) {
-                    inputData[i] = null;
-                }
-                inputData[i] = new object[input.ConnectionCount];
-                for (int k = 0; k < input.ConnectionCount; k++) {
-                    NodePort connectedPort = input.GetConnection(k);
-                    GraphmeshNode node = connectedPort.node as GraphmeshNode;
-                    inputData[i][k] = node.GetValue(connectedPort);
-                }
-            }*/
-            output = GenerateOutput(port);
-            return output;
+            //If no cached object could be returned, generate one
+            else return null;
         }
 
         public virtual bool TryGetValue<T>(NodePort port, out T value) {
@@ -38,11 +23,6 @@ namespace Graphmesh {
             else value = default(T);
             return value != null;
         }
-
-        /// <summary> Called when no object is found in cache. Generates a new output. </summary>        
-        /// <param name="port">Requested port</param>
-        /// <param name="inputs">All up-to-date inputs</param>
-        public abstract object GenerateOutput(NodePort port);
 
         public List<Model> GetModelList(NodePort port) {
             List<Model> models = new List<Model>();

@@ -5,12 +5,15 @@ using UnityEngine;
 namespace Graphmesh {
     public class SplineData : GraphmeshNode {
 
-        [Input(true)] public Bezier3DSpline spline;
-        [Output(false)] public float length;
-        [Output(false)] public float pointCount;
+        [Input] public Bezier3DSpline spline;
+        [Output] public float length;
+        [Output] public float pointCount;
 
-        public override object GenerateOutput(NodePort port) {
-			Bezier3DSpline spline = this.spline;
+        public override object GetValue(NodePort port) {
+            object o = base.GetValue(port);
+            if (o != null) return o;
+
+            Bezier3DSpline spline = this.spline;
 			NodePort splineInput = GetInputByFieldName("spline").Connection;
 			if (splineInput != null) spline = splineInput.GetOutputValue() as Bezier3DSpline;
 

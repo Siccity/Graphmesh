@@ -4,17 +4,19 @@ using UnityEngine;
 namespace Graphmesh {
     public class Array : GraphmeshNode {
 
-        [Input(false)] public List<Model> model;
-        [Output(false)] public List<Model> output;
+        [Input(ShowBackingValue.Never)] public List<Model> model;
+        [Output] public List<Model> output;
 
         public bool fitLength;
-        [Input(true)] public float length;
-        [Input(true)] public int count;
+        [Input] public float length;
+        [Input] public int count;
         public Vector3 posOffset;
         public Vector3 rotOffset;
         public enum LengthFitMethod { RoundUp, RoundDown, ScaleUp, ScaleDown, Cut }
 
-        public override object GenerateOutput(NodePort port) {
+        public override object GetValue(NodePort port) {
+            object o = base.GetValue(port);
+            if (o != null) return o;
 
             List<Model> inputModels = GetModelList(GetInputByFieldName("model"));
             List<Model> output = new List<Model>();

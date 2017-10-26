@@ -7,7 +7,7 @@ namespace Graphmesh {
     public class ExposedInput : GraphmeshNode {
 
         public string label = "Unnamed";
-        [Output(false)] public object value;
+        [Output] public object value;
 
         public System.Type GetOutputType() {
             NodePort port = GetOutputByFieldName("value");
@@ -62,10 +62,6 @@ namespace Graphmesh {
             mesh.SetNormals(norms);
             mesh.SetTangents(tangent);
             return mesh;
-        }
-
-        public override object GenerateOutput(NodePort port) {
-            return null;
         }
     }
 }

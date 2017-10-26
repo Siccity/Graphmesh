@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Graphmesh {
     public class OutputModel : GraphmeshNode {
 
-        [Input(false)] public List<Model> model;
+        [Input(ShowBackingValue.Never)] public List<Model> model;
 
         public List<Model> GetModels() {
 
@@ -13,7 +13,10 @@ namespace Graphmesh {
             return GetValue(modelPort) as List<Model>;
         }
 
-        public override object GenerateOutput(NodePort port) {
+        public override object GetValue(NodePort port) {
+            object o = base.GetValue(port);
+            if (o != null) return o;
+
             List<Model> models = GetModelList(GetInputByFieldName("model"));
             for (int i = 0; i < models.Count; i++) {
                 models[i].mesh.RecalculateBounds();

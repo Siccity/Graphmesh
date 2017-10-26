@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 namespace Graphmesh {
+    /// <summary> Defines a mesh with materials </summary>
     public class Model {
         public Mesh mesh;
         public Material[] materials;

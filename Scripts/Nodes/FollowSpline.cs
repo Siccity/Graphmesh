@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Graphmesh {
     public class FollowSpline : GraphmeshNode {
 
-        [Input(false)] public List<Model> model;
-        [Input(false)] public Bezier3DSpline spline;
-        [Output(false)] public List<Model> output;
+        [Input(ShowBackingValue.Never)] public List<Model> model;
+        [Input] public Bezier3DSpline spline;
+        [Output] public List<Model> output;
         public enum Axis {
             x = 0,
                 y = 1,
@@ -18,7 +18,10 @@ namespace Graphmesh {
             name = "Follow Spline";
         }
 
-        public override object GenerateOutput(NodePort port) {
+        public override object GetValue(NodePort port) {
+            object o = base.GetValue(port);
+            if (o != null) return o;
+
             List<Model> input = GetModelList(GetInputByFieldName("model"));
             NodePort splinePort = GetPortByFieldName("spline");
             Bezier3DSpline spline = splinePort.Connection.GetOutputValue() as Bezier3DSpline;

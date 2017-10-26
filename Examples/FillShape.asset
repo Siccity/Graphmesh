@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa84fc612ad1f94e8f79a8b7ff076b0, type: 3}
+  m_Name: FillShape
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 114632556315273236}
+  - {fileID: 114357630098865740}
+  - {fileID: 114070999419420376}
+  - {fileID: 114164213531793386}
+  - {fileID: 114611053987445236}
+--- !u!114 &114070999419420376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333f74f2de9dffe4ba0d766effec9995, type: 3}
+  m_Name: ExposedInput
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -330.5, y: 14.5}
+  inputs: []
+  outputs:
+  - node: {fileID: 114070999419420376}
+    _fieldName: value
+    connections:
+    - fieldName: material
+      node: {fileID: 114632556315273236}
+    _direction: 1
+  label: Material
+--- !u!114 &114164213531793386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adb454b88a0dc542aa44472a5aa5804, type: 3}
+  m_Name: OutputModel
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 416.5, y: -46.5}
+  inputs:
+  - node: {fileID: 114164213531793386}
+    _fieldName: model
+    connections:
+    - fieldName: output
+      node: {fileID: 114611053987445236}
+    _direction: 0
+  outputs: []
+--- !u!114 &114357630098865740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333f74f2de9dffe4ba0d766effec9995, type: 3}
+  m_Name: ExposedInput
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -332.5, y: -89.5}
+  inputs: []
+  outputs:
+  - node: {fileID: 114357630098865740}
+    _fieldName: value
+    connections:
+    - fieldName: spline
+      node: {fileID: 114632556315273236}
+    _direction: 1
+  label: Spline
+--- !u!114 &114611053987445236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec2daefb2a223b4f81c713612693ce3, type: 3}
+  m_Name: Extrude
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 138.80019, y: -70.30763}
+  inputs:
+  - node: {fileID: 114611053987445236}
+    _fieldName: input
+    connections:
+    - fieldName: output
+      node: {fileID: 114632556315273236}
+    _direction: 0
+  - node: {fileID: 114611053987445236}
+    _fieldName: distance
+    connections: []
+    _direction: 0
+  outputs:
+  - node: {fileID: 114611053987445236}
+    _fieldName: output
+    connections:
+    - fieldName: model
+      node: {fileID: 114164213531793386}
+    _direction: 1
+  distance: 1.3836015
+--- !u!114 &114632556315273236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae07c9646297564c90981ccf6380c04, type: 3}
+  m_Name: FillSpline
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -81.5, y: -49.5}
+  inputs:
+  - node: {fileID: 114632556315273236}
+    _fieldName: spline
+    connections:
+    - fieldName: value
+      node: {fileID: 114357630098865740}
+    _direction: 0
+  - node: {fileID: 114632556315273236}
+    _fieldName: material
+    connections:
+    - fieldName: value
+      node: {fileID: 114070999419420376}
+    _direction: 0
+  - node: {fileID: 114632556315273236}
+    _fieldName: resolution
+    connections: []
+    _direction: 0
+  outputs:
+  - node: {fileID: 114632556315273236}
+    _fieldName: output
+    connections:
+    - fieldName: input
+      node: {fileID: 114611053987445236}
+    _direction: 1
+  spline: {fileID: 0}
+  material: {fileID: 0}
+  resolution: 10
