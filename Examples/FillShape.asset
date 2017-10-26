@@ -17,6 +17,9 @@ MonoBehaviour:
   - {fileID: 114070999419420376}
   - {fileID: 114164213531793386}
   - {fileID: 114611053987445236}
+  - {fileID: 114941983144437130}
+  - {fileID: 114752571360616476}
+  - {fileID: 0}
 --- !u!114 &114070999419420376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,13 +54,13 @@ MonoBehaviour:
   m_Name: OutputModel
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 416.5, y: -46.5}
+  position: {x: 770.5, y: 29.5}
   inputs:
   - node: {fileID: 114164213531793386}
     _fieldName: model
     connections:
     - fieldName: output
-      node: {fileID: 114611053987445236}
+      node: {fileID: 114752571360616476}
     _direction: 0
   outputs: []
 --- !u!114 &114357630098865740
@@ -94,7 +97,7 @@ MonoBehaviour:
   m_Name: Extrude
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 138.80019, y: -70.30763}
+  position: {x: 188.87242, y: -26.823854}
   inputs:
   - node: {fileID: 114611053987445236}
     _fieldName: input
@@ -110,10 +113,10 @@ MonoBehaviour:
   - node: {fileID: 114611053987445236}
     _fieldName: output
     connections:
-    - fieldName: model
-      node: {fileID: 114164213531793386}
+    - fieldName: input
+      node: {fileID: 114752571360616476}
     _direction: 1
-  distance: 1.3836015
+  distance: 2.3320913
 --- !u!114 &114632556315273236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +153,65 @@ MonoBehaviour:
     connections:
     - fieldName: input
       node: {fileID: 114611053987445236}
+    - fieldName: input
+      node: {fileID: 114941983144437130}
     _direction: 1
   spline: {fileID: 0}
   material: {fileID: 0}
   resolution: 10
+--- !u!114 &114752571360616476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe2596c8165d864791244ef1b563be5, type: 3}
+  m_Name: MergeModels
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 540.1942, y: 9.74588}
+  inputs:
+  - node: {fileID: 114752571360616476}
+    _fieldName: input
+    connections:
+    - fieldName: output
+      node: {fileID: 114941983144437130}
+    - fieldName: output
+      node: {fileID: 114611053987445236}
+    _direction: 0
+  outputs:
+  - node: {fileID: 114752571360616476}
+    _fieldName: output
+    connections:
+    - fieldName: model
+      node: {fileID: 114164213531793386}
+    _direction: 1
+--- !u!114 &114941983144437130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbccba69a441d141adef993d90fe6d4, type: 3}
+  m_Name: FlipNormals
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 262.1942, y: 75.74588}
+  inputs:
+  - node: {fileID: 114941983144437130}
+    _fieldName: input
+    connections:
+    - fieldName: output
+      node: {fileID: 114632556315273236}
+    _direction: 0
+  outputs:
+  - node: {fileID: 114941983144437130}
+    _fieldName: output
+    connections:
+    - fieldName: input
+      node: {fileID: 114752571360616476}
+    _direction: 1
