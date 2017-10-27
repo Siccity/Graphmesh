@@ -44,6 +44,11 @@ namespace Graphmesh {
             filter.mesh = model.mesh;
             MeshRenderer renderer = target.AddComponent<MeshRenderer>();
             renderer.materials = model.materials;
+            if (model.colType == Model.ColliderType.Mesh) {
+                MeshCollider mcol = target.AddComponent<MeshCollider>();
+                mcol.sharedMesh = model.meshCol;
+                mcol.convex = model.meshColConvex;
+            }
         }
         private void ShowModels(List<Model> models) {
             for (int i = 0; i < models.Count; i++) {
@@ -63,6 +68,7 @@ namespace Graphmesh {
             }
             DestroyImmediate(GetComponent<MeshRenderer>());
             DestroyImmediate(GetComponent<MeshFilter>());
+            DestroyImmediate(GetComponent<Collider>());
         }
 
         void OnEnable() { }

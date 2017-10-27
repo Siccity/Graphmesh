@@ -5,9 +5,12 @@ using UnityEngine;
 namespace Graphmesh {
     /// <summary> Defines a mesh with materials </summary>
     public class Model {
+        public enum ColliderType { None, Mesh, Box, Sphere, Capsule }
         public Mesh mesh;
         public Material[] materials;
-
+        public ColliderType colType;
+        public Mesh meshCol;
+        public bool meshColConvex;
         public Model(Mesh mesh, Material[] materials) {
             this.mesh = mesh;
             this.materials = materials;

@@ -48,8 +48,9 @@ namespace Graphmesh {
                 mesh.triangles = tris;
                 mesh.normals = norms.ToArray();
                 List<Model> output = new List<Model>();
-                Material[] mat = new Material[] { GetInputByFieldName("material").GetInputValue() as Material };
-                output.Add(new Model(mesh, mat));
+                Material mat = GetInputByFieldName("material").GetInputValue() as Material;
+                Material[] mats = new Material[] { mat };
+                output.Add(new Model(mesh, mats));
                 return output;
             }
             return null;

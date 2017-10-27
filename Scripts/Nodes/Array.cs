@@ -9,7 +9,7 @@ namespace Graphmesh {
 
         public bool fitLength;
         [Input] public float length;
-        [Input] public int count;
+        [Input] public int count = 2;
         public Vector3 posOffset;
         public Vector3 rotOffset;
         public enum LengthFitMethod { RoundUp, RoundDown, ScaleUp, ScaleDown, Cut }
