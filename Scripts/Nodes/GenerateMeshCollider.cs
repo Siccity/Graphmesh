@@ -14,7 +14,6 @@ namespace Graphmesh {
 
             List<Model> models = GetModelList(GetInputByFieldName("input"));
             for (int i = 0; i < models.Count; i++) {
-                MeshCollider meshCol = new MeshCollider();
                 models[i].colType = Model.ColliderType.Mesh;
                 models[i].meshCol = models[i].mesh;
                 models[i].meshColConvex = convex;
