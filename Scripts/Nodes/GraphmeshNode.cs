@@ -9,6 +9,7 @@ namespace Graphmesh {
         /// <summary> Override this before requesting model to use cache </summary>
         public static NodeCache currentOutputCache;
 
+        /// <summary> Returns cached object if there is any. Otherwise returns null </summary>
         public override object GetValue(NodePort port) {
             //Try to return a cached object
             object output = currentOutputCache.GetCachedObject(this, port.fieldName);
@@ -17,14 +18,7 @@ namespace Graphmesh {
             else return null;
         }
 
-        public virtual bool TryGetValue<T>(NodePort port, out T value) {
-            object obj = GetValue(port);
-            if (obj is T) value = (T)obj;
-            else value = default(T);
-            return value != null;
-        }
-
-        public List<Model> GetModelList(NodePort port) {
+        /*public List<Model> GetModelList(NodePort port) {
             List<Model> models = new List<Model>();
             for (int i = 0; i < port.ConnectionCount; i++) {
                 NodePort connectedPort = port.GetConnection(i);
@@ -38,6 +32,6 @@ namespace Graphmesh {
                 }
             }
             return models;
-        }
+        }*/
     }
 }

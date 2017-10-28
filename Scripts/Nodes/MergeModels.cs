@@ -4,15 +4,27 @@ using UnityEngine;
 namespace Graphmesh {
     public class MergeModels : GraphmeshNode {
 
-        [Input(ShowBackingValue.Never)] public List<Model> input = new List<Model>();
-        [Output] public List<Model> output = new List<Model>();
+        [Input(ShowBackingValue.Never)] public ModelGroup input;
+        [Output] public ModelGroup output;
 
         public override object GetValue(NodePort port) {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-            List<Model> inputModels = GetModelList(GetInputByFieldName("input"));
-            return new List<Model>() { Model.CombineModels(inputModels) };
+            // Get inputs
+            ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
+
+            List<Model> models = new List<Model>();
+
+            // Loop through input model groups
+            for (int mg = 0; mg < input.Length; mg++) {
+                if (input[mg] == null) continue;
+                // Loop through group models
+                for (int i = 0; i < input[mg].Count; i++) {
+                    models.Add(input[mg][i]);
+                }
+            }
+            return new List<Model>() { Model.CombineModels(models) };
         }
     }
 }

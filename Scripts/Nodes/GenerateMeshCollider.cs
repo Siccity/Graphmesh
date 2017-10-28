@@ -4,22 +4,32 @@ using UnityEngine;
 namespace Graphmesh {
     public class GenerateMeshCollider : GraphmeshNode {
 
-        [Input(ShowBackingValue.Never)] public List<Model> input;
-        public bool convex;
-        [Output] public List<Model> output;
-        
+        [Input(ShowBackingValue.Never)] public ModelGroup input;
+        [Input] public bool convex;
+        [Output] public ModelGroup output;
+
         public override object GetValue(NodePort port) {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-            List<Model> models = GetModelList(GetInputByFieldName("input"));
-            for (int i = 0; i < models.Count; i++) {
-                models[i].colType = Model.ColliderType.Mesh;
-                models[i].meshCol = models[i].mesh;
-                models[i].meshColConvex = convex;
-            }
+            // Get inputs
+            ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
+            bool convex = GetInputByFieldName<bool>("convex", this.convex);
+            ModelGroup output = new ModelGroup();
 
-            return models;
+            // Loop through input model groups
+            for (int mg = 0; mg < input.Length; mg++) {
+                if (input[mg] == null) continue;
+                // Loop through group models
+                for (int i = 0; i < input[mg].Count; i++) {
+                    output.Add(new Model(input[mg][i]) {
+                        colType = Model.ColliderType.Mesh,
+                            meshCol = input[mg][i].mesh,
+                            meshColConvex = convex
+                    });
+                }
+            }
+            return output;
         }
     }
 }

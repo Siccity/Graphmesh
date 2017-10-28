@@ -65,10 +65,8 @@ MonoBehaviour:
   position: {x: 436.24005, y: -8.559982}
   inputs:
   - node: {fileID: 114164213531793386}
-    _fieldName: model
-    connections:
-    - fieldName: output
-      node: {fileID: 114913169416362034}
+    _fieldName: input
+    connections: []
     _direction: 0
   outputs: []
 --- !u!114 &114407045000984300
@@ -117,17 +115,15 @@ MonoBehaviour:
   position: {x: -34, y: -116}
   inputs:
   - node: {fileID: 114669352687072152}
-    _fieldName: model
-    connections:
-    - fieldName: output
-      node: {fileID: 114961421450061384}
-    _direction: 0
-  - node: {fileID: 114669352687072152}
     _fieldName: length
     connections: []
     _direction: 0
   - node: {fileID: 114669352687072152}
     _fieldName: count
+    connections: []
+    _direction: 0
+  - node: {fileID: 114669352687072152}
+    _fieldName: input
     connections: []
     _direction: 0
   outputs:

@@ -18,7 +18,6 @@ MonoBehaviour:
   - {fileID: 114164213531793386}
   - {fileID: 114611053987445236}
   - {fileID: 114991528711891516}
-  - {fileID: 114794270541512844}
 --- !u!114 &114070999419420376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,15 +52,13 @@ MonoBehaviour:
   m_Name: OutputModel
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 770.5, y: 71.5}
+  position: {x: 772.9201, y: 42.45999}
   inputs:
   - node: {fileID: 114164213531793386}
-    _fieldName: model
+    _fieldName: input
     connections:
     - fieldName: output
-      node: {fileID: 114794270541512844}
-    - fieldName: output
-      node: {fileID: 114632556315273236}
+      node: {fileID: 114991528711891516}
     _direction: 0
   outputs: []
 --- !u!114 &114357630098865740
@@ -98,7 +95,7 @@ MonoBehaviour:
   m_Name: Extrude
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 59.5365, y: -50.17533}
+  position: {x: 37.5365, y: -98.17533}
   inputs:
   - node: {fileID: 114611053987445236}
     _fieldName: input
@@ -117,7 +114,7 @@ MonoBehaviour:
     - fieldName: input
       node: {fileID: 114991528711891516}
     _direction: 1
-  distance: -2.3
+  distance: 3.6352246
 --- !u!114 &114632556315273236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +127,7 @@ MonoBehaviour:
   m_Name: FillSpline
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -186.28473, y: -9.339905}
+  position: {x: -194.28473, y: -55.339905}
   inputs:
   - node: {fileID: 114632556315273236}
     _fieldName: spline
@@ -154,39 +151,10 @@ MonoBehaviour:
     connections:
     - fieldName: input
       node: {fileID: 114611053987445236}
-    - fieldName: model
-      node: {fileID: 114164213531793386}
     _direction: 1
   spline: {fileID: 0}
   material: {fileID: 2100000, guid: d31bf59cad81de34e8ffdd4ad38f384c, type: 2}
   resolution: 10
---- !u!114 &114794270541512844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bbccba69a441d141adef993d90fe6d4, type: 3}
-  m_Name: FlipNormals
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 521, y: -20}
-  inputs:
-  - node: {fileID: 114794270541512844}
-    _fieldName: input
-    connections:
-    - fieldName: output
-      node: {fileID: 114991528711891516}
-    _direction: 0
-  outputs:
-  - node: {fileID: 114794270541512844}
-    _fieldName: output
-    connections:
-    - fieldName: model
-      node: {fileID: 114164213531793386}
-    _direction: 1
 --- !u!114 &114991528711891516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,7 +167,7 @@ MonoBehaviour:
   m_Name: GenerateMeshCollider
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 298, y: -97}
+  position: {x: 294, y: -77}
   inputs:
   - node: {fileID: 114991528711891516}
     _fieldName: input
@@ -207,11 +175,15 @@ MonoBehaviour:
     - fieldName: output
       node: {fileID: 114611053987445236}
     _direction: 0
+  - node: {fileID: 114991528711891516}
+    _fieldName: convex
+    connections: []
+    _direction: 0
   outputs:
   - node: {fileID: 114991528711891516}
     _fieldName: output
     connections:
     - fieldName: input
-      node: {fileID: 114794270541512844}
+      node: {fileID: 114164213531793386}
     _direction: 1
   convex: 1

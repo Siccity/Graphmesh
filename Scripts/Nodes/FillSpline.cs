@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
+
 
 namespace Graphmesh {
     public class FillSpline : GraphmeshNode {
@@ -10,22 +11,18 @@ namespace Graphmesh {
         [Input(ShowBackingValue.Never)] public Bezier3DSpline spline;
         [Input] public Material material;
         [Input] public int resolution = 10;
-        [Output] public List<Model> output;
+        [Output] public ModelGroup output;
 
         public override object GetValue(NodePort port) {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-            float resolution = 0;
-            object obj = GetInputByFieldName("resolution").GetInputValue();
-            if (obj != null) resolution = (float)obj;
-            else resolution = this.resolution;
+            Bezier3DSpline spline = GetInputByFieldName<Bezier3DSpline>("spline", this.spline);
+            Material material = GetInputByFieldName<Material>("material", this.material);
+            float resolution = GetInputByFieldName<float>("resolution", this.resolution);
 
-            Bezier3DSpline spline;
-            if (GetInputByFieldName("spline").TryGetInputValue(out spline)) {
-
+            if (spline != null) {
                 List<Vector2> points = new List<Vector2>();
-
                 for (int i = 0; i < spline.KnotCount; i++) {
                     Vector3 pos = spline.GetKnot(i).position;
                     points.Add(new Vector2(pos.x, pos.z));
@@ -33,7 +30,7 @@ namespace Graphmesh {
                     Bezier3DCurve curve = spline.GetCurve(i);
                     if (!curve.isLinear) {
                         for (int k = 1; k < resolution; k++) {
-                            float t = (float)k / resolution;
+                            float t = (float) k / resolution;
                             pos = curve.GetPoint(t);
                             points.Add(new Vector2(pos.x, pos.z));
                         }
@@ -47,13 +44,12 @@ namespace Graphmesh {
                 mesh.vertices = verts.ToArray();
                 mesh.triangles = tris;
                 mesh.normals = norms.ToArray();
-                List<Model> output = new List<Model>();
-                Material mat = GetInputByFieldName("material").GetInputValue() as Material;
-                Material[] mats = new Material[] { mat };
+                ModelGroup output = new ModelGroup();
+                Material[] mats = new Material[] { material };
                 output.Add(new Model(mesh, mats));
                 return output;
             }
-            return null;
+            else return null;
         }
 
         public int[] Triangulate(List<Vector2> points) {
@@ -124,7 +120,7 @@ namespace Graphmesh {
             Vector2 A = points[V[u]];
             Vector2 B = points[V[v]];
             Vector2 C = points[V[w]];
-            if (Mathf.Epsilon > (((B.x - A.x) * (C.y - A.y)) - ((B.y - A.y) * (C.x - A.x))))
+            if (Mathf.Epsilon >(((B.x - A.x) * (C.y - A.y)) - ((B.y - A.y) * (C.x - A.x))))
                 return false;
             for (p = 0; p < n; p++) {
                 if ((p == u) || (p == v) || (p == w))
@@ -140,12 +136,18 @@ namespace Graphmesh {
             float ax, ay, bx, by, cx, cy, apx, apy, bpx, bpy, cpx, cpy;
             float cCROSSap, bCROSScp, aCROSSbp;
 
-            ax = C.x - B.x; ay = C.y - B.y;
-            bx = A.x - C.x; by = A.y - C.y;
-            cx = B.x - A.x; cy = B.y - A.y;
-            apx = P.x - A.x; apy = P.y - A.y;
-            bpx = P.x - B.x; bpy = P.y - B.y;
-            cpx = P.x - C.x; cpy = P.y - C.y;
+            ax = C.x - B.x;
+            ay = C.y - B.y;
+            bx = A.x - C.x;
+            by = A.y - C.y;
+            cx = B.x - A.x;
+            cy = B.y - A.y;
+            apx = P.x - A.x;
+            apy = P.y - A.y;
+            bpx = P.x - B.x;
+            bpy = P.y - B.y;
+            cpx = P.x - C.x;
+            cpy = P.y - C.y;
 
             aCROSSbp = ax * bpy - ay * bpx;
             cCROSSap = cx * apy - cy * apx;

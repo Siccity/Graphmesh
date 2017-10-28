@@ -9,9 +9,9 @@ namespace Graphmesh {
         protected override void OnBodyGUI(out Dictionary<NodePort, Vector2> portPositions) {
             portPositions = new Dictionary<NodePort, Vector2>();
             Array array = target as Array;
-            NodePort modelPort = array.GetInputByFieldName("model");
+            NodePort modelPort = array.GetInputByFieldName("input");
             Vector2 portPos;
-            array.model = NodeEditorGUILayout.PortField("Model", array.model, typeof(List<Model>), modelPort, false, out portPos) as List<Model>;
+            array.input = NodeEditorGUILayout.PortField("Model", array.input, typeof(ModelGroup), modelPort, false, out portPos) as ModelGroup;
             portPositions.Add(modelPort, portPos);
 
             NodePort outputPort = array.GetOutputByFieldName("output");

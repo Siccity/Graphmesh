@@ -4,42 +4,39 @@ using UnityEngine;
 namespace Graphmesh {
     public class FollowSpline : GraphmeshNode {
 
-        [Input(ShowBackingValue.Never)] public List<Model> model;
+        [Input(ShowBackingValue.Never)] public ModelGroup input;
         [Input] public Bezier3DSpline spline;
-        [Output] public List<Model> output;
-        public enum Axis {
-            x = 0,
-                y = 1,
-                z = 2
-        }
+        [Output] public ModelGroup output;
+        public enum Axis { x = 0, y = 1, z = 2 }
         public Axis axis = Axis.z;
-
-        protected override void Init() {
-            name = "Follow Spline";
-        }
 
         public override object GetValue(NodePort port) {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-            List<Model> input = GetModelList(GetInputByFieldName("model"));
-            NodePort splinePort = GetPortByFieldName("spline");
-            Bezier3DSpline spline = splinePort.Connection.GetOutputValue() as Bezier3DSpline;
+            ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
+            Bezier3DSpline spline = GetInputByFieldName<Bezier3DSpline>("spline", this.spline);
+            ModelGroup output = new ModelGroup();
 
-            if (spline == null) Debug.Log("Spline is null");
-
-            for (int i = 0; i < input.Count; i++) {
-                FollowCurve(input[i], spline);
+            // Loop through input model groups
+            for (int mg = 0; mg < input.Length; mg++) {
+                if (input[mg] == null) continue;
+                // Loop through group models
+                for (int i = 0; i < input[mg].Count; i++) {
+                    Mesh mesh = input[mg][i].mesh.Copy();
+                    FollowCurve(mesh, spline);
+                    output.Add(new Model(input[mg][i]) { mesh = mesh });
+                }
             }
-            return input;
+            return output;
         }
 
-        private void FollowCurve(Model model, Bezier3DSpline spline) {
+        private void FollowCurve(Mesh mesh, Bezier3DSpline spline) {
             int axis = (int) this.axis;
-            Vector3[] verts = model.mesh.vertices;
-            Vector3[] norms = model.mesh.normals;
-            Vector4[] tan = model.mesh.tangents;
-            for (int i = 0; i < model.mesh.vertexCount; i++) {
+            Vector3[] verts = mesh.vertices;
+            Vector3[] norms = mesh.normals;
+            Vector4[] tan = mesh.tangents;
+            for (int i = 0; i < mesh.vertexCount; i++) {
                 float dist = verts[i][axis];
                 Vector3 offset = verts[i];
                 offset[axis] = 0;
@@ -52,9 +49,9 @@ namespace Graphmesh {
                 tan[i] = orientation * new Vector3(tan[i].x, tan[i].y, tan[i].z);
                 tan[i].w = w;
             }
-            model.mesh.SetVertices(new List<Vector3>(verts));
-            model.mesh.SetNormals(new List<Vector3>(norms));
-            model.mesh.SetTangents(new List<Vector4>(tan));
+            mesh.SetVertices(new List<Vector3>(verts));
+            mesh.SetNormals(new List<Vector3>(norms));
+            mesh.SetTangents(new List<Vector4>(tan));
         }
     }
 }

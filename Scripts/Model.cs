@@ -11,6 +11,15 @@ namespace Graphmesh {
         public ColliderType colType;
         public Mesh meshCol;
         public bool meshColConvex;
+
+        public Model(Model model) {
+            mesh = model.mesh;
+            materials = model.materials;
+            colType = model.colType;
+            meshCol = model.meshCol;
+            meshColConvex = model.meshColConvex;
+        }
+        
         public Model(Mesh mesh, Material[] materials) {
             this.mesh = mesh;
             this.materials = materials;

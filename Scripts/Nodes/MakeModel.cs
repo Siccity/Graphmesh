@@ -6,7 +6,7 @@ namespace Graphmesh {
 
         [Input] public Mesh mesh;
         [Input] public Material material;
-        [Output] public List<Model> output = new List<Model>();
+        [Output] public ModelGroup output;
 
         public override object GetValue(NodePort port) {
             object o = base.GetValue(port);
@@ -17,7 +17,7 @@ namespace Graphmesh {
 
             //Fixme: Support for more than one material
             Model model = new Model(mesh.Copy(), new Material[] { material });
-            return new List<Model>() { model };
+            return new ModelGroup() { model };
         }
     }
 }
