@@ -1,3 +1,4 @@
+___Note: Graphmesh is still a very early WIP. Expect a lot of missing / incomplete features.___
 ### Graphmesh
 A graph-based solution for procedural mesh inside the unity editor. Ideal for level design. Works in conjunction with existing assets to create detailed procedural assets.
 
