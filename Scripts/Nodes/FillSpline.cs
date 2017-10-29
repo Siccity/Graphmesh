@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Graphmesh {
     public class FillSpline : GraphmeshNode {
 
-        [Input(ShowBackingValue.Never)] public Bezier3DSpline spline;
+        [Input] public Bezier3DSpline spline;
         [Input] public Material material;
         [Input] public int resolution = 10;
         [Output] public ModelGroup output;

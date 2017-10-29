@@ -124,7 +124,9 @@ MonoBehaviour:
     _direction: 0
   - node: {fileID: 114669352687072152}
     _fieldName: input
-    connections: []
+    connections:
+    - fieldName: output
+      node: {fileID: 114961421450061384}
     _direction: 0
   outputs:
   - node: {fileID: 114669352687072152}
@@ -205,9 +207,7 @@ MonoBehaviour:
   outputs:
   - node: {fileID: 114913169416362034}
     _fieldName: output
-    connections:
-    - fieldName: model
-      node: {fileID: 114164213531793386}
+    connections: []
     _direction: 1
 --- !u!114 &114961421450061384
 MonoBehaviour:
@@ -245,7 +245,7 @@ MonoBehaviour:
   - node: {fileID: 114961421450061384}
     _fieldName: output
     connections:
-    - fieldName: model
+    - fieldName: input
       node: {fileID: 114669352687072152}
     _direction: 1
   t: {x: 0, y: 0, z: 0}

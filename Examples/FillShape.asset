@@ -13,12 +13,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: 114632556315273236}
-  - {fileID: 114357630098865740}
-  - {fileID: 114070999419420376}
   - {fileID: 114164213531793386}
   - {fileID: 114611053987445236}
   - {fileID: 114991528711891516}
---- !u!114 &114070999419420376
+  - {fileID: 114077181132956892}
+  - {fileID: 114321097876358692}
+  - {fileID: 114057770197411388}
+  - {fileID: 114264266371243250}
+  - {fileID: 114684122484083430}
+--- !u!114 &114057770197411388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -30,16 +33,38 @@ MonoBehaviour:
   m_Name: ExposedInput
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -447.9409, y: -53.484238}
+  position: {x: -400.66666, y: -11.0996275}
   inputs: []
   outputs:
-  - node: {fileID: 114070999419420376}
+  - node: {fileID: 114057770197411388}
     _fieldName: value
     connections:
     - fieldName: material
       node: {fileID: 114632556315273236}
     _direction: 1
   label: Material
+--- !u!114 &114077181132956892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333f74f2de9dffe4ba0d766effec9995, type: 3}
+  m_Name: ExposedInput
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -194.38507, y: -222.02481}
+  inputs: []
+  outputs:
+  - node: {fileID: 114077181132956892}
+    _fieldName: value
+    connections:
+    - fieldName: distance
+      node: {fileID: 114611053987445236}
+    _direction: 1
+  label: Dist
 --- !u!114 &114164213531793386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,7 +77,7 @@ MonoBehaviour:
   m_Name: OutputModel
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 772.9201, y: 42.45999}
+  position: {x: 717.9139, y: 4.6432266}
   inputs:
   - node: {fileID: 114164213531793386}
     _fieldName: input
@@ -61,7 +86,51 @@ MonoBehaviour:
       node: {fileID: 114991528711891516}
     _direction: 0
   outputs: []
---- !u!114 &114357630098865740
+--- !u!114 &114264266371243250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd69c933e682d204c9c5e263e98474f1, type: 3}
+  m_Name: TRS
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 285, y: -64}
+  inputs:
+  - node: {fileID: 114264266371243250}
+    _fieldName: input
+    connections:
+    - fieldName: output
+      node: {fileID: 114611053987445236}
+    _direction: 0
+  - node: {fileID: 114264266371243250}
+    _fieldName: t
+    connections:
+    - fieldName: vector
+      node: {fileID: 114684122484083430}
+    _direction: 0
+  - node: {fileID: 114264266371243250}
+    _fieldName: r
+    connections: []
+    _direction: 0
+  - node: {fileID: 114264266371243250}
+    _fieldName: s
+    connections: []
+    _direction: 0
+  outputs:
+  - node: {fileID: 114264266371243250}
+    _fieldName: output
+    connections:
+    - fieldName: input
+      node: {fileID: 114991528711891516}
+    _direction: 1
+  t: {x: 0.5, y: 0, z: 0}
+  r: {x: 0, y: 0, z: 0}
+  s: {x: 1, y: 1, z: 1}
+--- !u!114 &114321097876358692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -73,16 +142,51 @@ MonoBehaviour:
   m_Name: ExposedInput
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -417.9488, y: -152.6601}
+  position: {x: -416.79813, y: -117.77176}
   inputs: []
   outputs:
-  - node: {fileID: 114357630098865740}
+  - node: {fileID: 114321097876358692}
     _fieldName: value
     connections:
     - fieldName: spline
       node: {fileID: 114632556315273236}
     _direction: 1
   label: Spline
+--- !u!114 &114391578733678660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e05e2a1f5ad7645850d52212143629, type: 3}
+  m_Name: Mathf
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -392.96118, y: 109.993805}
+  inputs:
+  - node: {fileID: 114391578733678660}
+    _fieldName: a
+    connections: []
+    _direction: 0
+  - node: {fileID: 114391578733678660}
+    _fieldName: b
+    connections:
+    - fieldName: value
+      node: {fileID: 114077181132956892}
+    _direction: 0
+  outputs:
+  - node: {fileID: 114391578733678660}
+    _fieldName: result
+    connections:
+    - fieldName: a
+      node: {fileID: 114831188555162306}
+    _direction: 1
+  a: 0
+  b: 0.5
+  result: 0
+  mathType: 1
 --- !u!114 &114611053987445236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,16 +209,18 @@ MonoBehaviour:
     _direction: 0
   - node: {fileID: 114611053987445236}
     _fieldName: distance
-    connections: []
+    connections:
+    - fieldName: value
+      node: {fileID: 114077181132956892}
     _direction: 0
   outputs:
   - node: {fileID: 114611053987445236}
     _fieldName: output
     connections:
     - fieldName: input
-      node: {fileID: 114991528711891516}
+      node: {fileID: 114264266371243250}
     _direction: 1
-  distance: 3.6352246
+  distance: 1.2966709
 --- !u!114 &114632556315273236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,19 +233,19 @@ MonoBehaviour:
   m_Name: FillSpline
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -194.28473, y: -55.339905}
+  position: {x: -189.80803, y: -80.360115}
   inputs:
   - node: {fileID: 114632556315273236}
     _fieldName: spline
     connections:
     - fieldName: value
-      node: {fileID: 114357630098865740}
+      node: {fileID: 114321097876358692}
     _direction: 0
   - node: {fileID: 114632556315273236}
     _fieldName: material
     connections:
     - fieldName: value
-      node: {fileID: 114070999419420376}
+      node: {fileID: 114057770197411388}
     _direction: 0
   - node: {fileID: 114632556315273236}
     _fieldName: resolution
@@ -153,8 +259,82 @@ MonoBehaviour:
       node: {fileID: 114611053987445236}
     _direction: 1
   spline: {fileID: 0}
-  material: {fileID: 2100000, guid: d31bf59cad81de34e8ffdd4ad38f384c, type: 2}
+  material: {fileID: 2100000, guid: 7f78e11322b97b544ace22b6bd0a824c, type: 2}
   resolution: 10
+--- !u!114 &114684122484083430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05559f4106850df4ab41776666216480, type: 3}
+  m_Name: Vector
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 34, y: 37}
+  inputs:
+  - node: {fileID: 114684122484083430}
+    _fieldName: x
+    connections: []
+    _direction: 0
+  - node: {fileID: 114684122484083430}
+    _fieldName: y
+    connections:
+    - fieldName: result
+      node: {fileID: 0}
+    _direction: 0
+  - node: {fileID: 114684122484083430}
+    _fieldName: z
+    connections: []
+    _direction: 0
+  outputs:
+  - node: {fileID: 114684122484083430}
+    _fieldName: vector
+    connections:
+    - fieldName: t
+      node: {fileID: 114264266371243250}
+    _direction: 1
+  x: 0
+  y: 0
+  z: 0
+  vector: {x: 0, y: 0, z: 0}
+--- !u!114 &114831188555162306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e05e2a1f5ad7645850d52212143629, type: 3}
+  m_Name: Mathf
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -182, y: 76}
+  inputs:
+  - node: {fileID: 114831188555162306}
+    _fieldName: a
+    connections:
+    - fieldName: result
+      node: {fileID: 114391578733678660}
+    _direction: 0
+  - node: {fileID: 114831188555162306}
+    _fieldName: b
+    connections: []
+    _direction: 0
+  outputs:
+  - node: {fileID: 114831188555162306}
+    _fieldName: result
+    connections:
+    - fieldName: y
+      node: {fileID: 114684122484083430}
+    _direction: 1
+  a: 0
+  b: 0.5
+  result: 0
+  mathType: 2
 --- !u!114 &114991528711891516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,13 +347,13 @@ MonoBehaviour:
   m_Name: GenerateMeshCollider
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 294, y: -77}
+  position: {x: 501, y: -20.692543}
   inputs:
   - node: {fileID: 114991528711891516}
     _fieldName: input
     connections:
     - fieldName: output
-      node: {fileID: 114611053987445236}
+      node: {fileID: 114264266371243250}
     _direction: 0
   - node: {fileID: 114991528711891516}
     _fieldName: convex

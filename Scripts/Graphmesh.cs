@@ -4,13 +4,10 @@ using UnityEngine;
 
 namespace Graphmesh {
     public class Graphmesh : MonoBehaviour {
+        /// <summary> NodeGraph to use for generating the mesh </summary>
+        public NodeGraph nodeGraph;
         /// <summary> Automatically generated and managed. Reuses node outputs. </summary>
         public NodeCache outputCache = new NodeCache();
-
-        public NodeGraph nodeGraph;
-        //public Transform template;
-        public bool singleMesh;
-        public bool generateLightmapUVs;
 
         [ContextMenu("Generate")]
         public void Generate() {
@@ -36,11 +33,6 @@ namespace Graphmesh {
 
         private void ShowModel(GameObject target, Model model) {
             MeshFilter filter = target.AddComponent<MeshFilter>();
-#if UNITY_EDITOR
-            if (generateLightmapUVs) {
-                UnityEditor.Unwrapping.GenerateSecondaryUVSet(model.mesh);
-            }
-#endif
             filter.mesh = model.mesh;
             MeshRenderer renderer = target.AddComponent<MeshRenderer>();
             renderer.materials = model.materials;

@@ -17,6 +17,7 @@ namespace Graphmesh {
             ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
             Bezier3DSpline spline = GetInputByFieldName<Bezier3DSpline>("spline", this.spline);
             ModelGroup output = new ModelGroup();
+            if (input == null) return output;
 
             // Loop through input model groups
             for (int mg = 0; mg < input.Length; mg++) {
@@ -24,7 +25,7 @@ namespace Graphmesh {
                 // Loop through group models
                 for (int i = 0; i < input[mg].Count; i++) {
                     Mesh mesh = input[mg][i].mesh.Copy();
-                    FollowCurve(mesh, spline);
+                    if (spline != null) FollowCurve(mesh, spline);
                     output.Add(new Model(input[mg][i]) { mesh = mesh });
                 }
             }

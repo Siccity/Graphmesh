@@ -13,17 +13,14 @@ namespace Graphmesh {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-            Bezier3DSpline spline = this.spline;
-			NodePort splineInput = GetInputByFieldName("spline").Connection;
-			if (splineInput != null) spline = splineInput.GetOutputValue() as Bezier3DSpline;
+			Bezier3DSpline spline = GetInputByFieldName<Bezier3DSpline>("spline", this.spline);
+			if (spline == null) return 0;
 
             if (port.fieldName == "length") {
-				if (spline != null) return spline.totalLength;
-				else return 0;
+				return spline.totalLength;
 			}
 			else if (port.fieldName == "pointCount") {
-				if (spline != null) return spline.KnotCount;
-				else return 0;
+				return spline.KnotCount;
 			}
 			else return null;
         }

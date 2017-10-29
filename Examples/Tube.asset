@@ -1,0 +1,227 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa84fc612ad1f94e8f79a8b7ff076b0, type: 3}
+  m_Name: Tube
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 114382070350379456}
+  - {fileID: 114413680948442106}
+  - {fileID: 114250953160747426}
+  - {fileID: 114076976749622524}
+  - {fileID: 114814548521537630}
+  - {fileID: 114413583113705090}
+  - {fileID: 114668179834758728}
+--- !u!114 &114076976749622524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d92814859397864f9f65bde0802139b, type: 3}
+  m_Name: Template
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -346.7, y: -197.79999}
+  inputs:
+  - node: {fileID: 114076976749622524}
+    _fieldName: template
+    connections:
+    - fieldName: value
+      node: {fileID: 114250953160747426}
+    _direction: 0
+  outputs:
+  - node: {fileID: 114076976749622524}
+    _fieldName: output
+    connections:
+    - fieldName: input
+      node: {fileID: 114413680948442106}
+    _direction: 1
+  template: {fileID: 0}
+--- !u!114 &114250953160747426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333f74f2de9dffe4ba0d766effec9995, type: 3}
+  m_Name: ExposedInput
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -572.5, y: -232}
+  inputs: []
+  outputs:
+  - node: {fileID: 114250953160747426}
+    _fieldName: value
+    connections:
+    - fieldName: template
+      node: {fileID: 114076976749622524}
+    _direction: 1
+  label: Template
+--- !u!114 &114382070350379456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adb454b88a0dc542aa44472a5aa5804, type: 3}
+  m_Name: OutputModel
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 346.8606, y: -57.594604}
+  inputs:
+  - node: {fileID: 114382070350379456}
+    _fieldName: input
+    connections:
+    - fieldName: output
+      node: {fileID: 114668179834758728}
+    _direction: 0
+  outputs: []
+--- !u!114 &114413583113705090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333f74f2de9dffe4ba0d766effec9995, type: 3}
+  m_Name: ExposedInput
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -579.0446, y: -33.921547}
+  inputs: []
+  outputs:
+  - node: {fileID: 114413583113705090}
+    _fieldName: value
+    connections:
+    - fieldName: spline
+      node: {fileID: 114814548521537630}
+    - fieldName: spline
+      node: {fileID: 114668179834758728}
+    _direction: 1
+  label: Spline
+--- !u!114 &114413680948442106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ffc9e756f3b674084489e3cebcd4cb, type: 3}
+  m_Name: Array
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -112.5, y: -182}
+  inputs:
+  - node: {fileID: 114413680948442106}
+    _fieldName: input
+    connections:
+    - fieldName: output
+      node: {fileID: 114076976749622524}
+    _direction: 0
+  - node: {fileID: 114413680948442106}
+    _fieldName: length
+    connections:
+    - fieldName: length
+      node: {fileID: 114814548521537630}
+    _direction: 0
+  - node: {fileID: 114413680948442106}
+    _fieldName: count
+    connections: []
+    _direction: 0
+  outputs:
+  - node: {fileID: 114413680948442106}
+    _fieldName: output
+    connections:
+    - fieldName: input
+      node: {fileID: 114668179834758728}
+    _direction: 1
+  fitLength: 1
+  length: 1
+  count: 2
+  posOffset: {x: 0, y: 0, z: 1}
+  rotOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &114668179834758728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9370c3fd62106734d93933b376455370, type: 3}
+  m_Name: FollowSpline
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 114.89679, y: -24.958534}
+  inputs:
+  - node: {fileID: 114668179834758728}
+    _fieldName: input
+    connections:
+    - fieldName: output
+      node: {fileID: 114413680948442106}
+    _direction: 0
+  - node: {fileID: 114668179834758728}
+    _fieldName: spline
+    connections:
+    - fieldName: value
+      node: {fileID: 114413583113705090}
+    _direction: 0
+  outputs:
+  - node: {fileID: 114668179834758728}
+    _fieldName: output
+    connections:
+    - fieldName: input
+      node: {fileID: 114382070350379456}
+    _direction: 1
+  spline: {fileID: 0}
+  axis: 2
+--- !u!114 &114814548521537630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c874d0d5be499284b84eabe1390ee2a1, type: 3}
+  m_Name: SplineData
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -343.25, y: -83.69998}
+  inputs:
+  - node: {fileID: 114814548521537630}
+    _fieldName: spline
+    connections:
+    - fieldName: value
+      node: {fileID: 114413583113705090}
+    _direction: 0
+  outputs:
+  - node: {fileID: 114814548521537630}
+    _fieldName: length
+    connections:
+    - fieldName: length
+      node: {fileID: 114413680948442106}
+    _direction: 1
+  - node: {fileID: 114814548521537630}
+    _fieldName: pointCount
+    connections: []
+    _direction: 1
+  spline: {fileID: 0}
+  length: 0
+  pointCount: 0
