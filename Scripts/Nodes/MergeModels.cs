@@ -14,17 +14,17 @@ namespace Graphmesh {
             // Get inputs
             ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
 
-            List<Model> models = new List<Model>();
+            ModelGroup output = new ModelGroup();
 
             // Loop through input model groups
             for (int mg = 0; mg < input.Length; mg++) {
                 if (input[mg] == null) continue;
                 // Loop through group models
                 for (int i = 0; i < input[mg].Count; i++) {
-                    models.Add(input[mg][i]);
+                    output.Add(input[mg][i]);
                 }
             }
-            return new List<Model>() { Model.CombineModels(models) };
+            return new ModelGroup { Model.CombineModels(output) };
         }
     }
 }
