@@ -32,57 +32,28 @@ namespace Graphmesh {
                 ExposedInput[] inputNodes = graphmesh.nodeGraph.nodes.Where(x => x is ExposedInput).Select(x => x as ExposedInput).ToArray();
 
                 for (int i = 0; i < inputNodes.Length; i++) {
-                    ExposedInput inputNode = inputNodes[i];
-                    System.Type type = inputNode.GetOutputType();
-                    string label = inputNode.label;
-
+                    //We do this by modifying one node field directly and then copying the result to the other nodes
                     EditorGUI.BeginChangeCheck();
-                    if (type == null) continue;
-                    else if (type == typeof(int)) {
-                        int value = graphmesh.outputCache.GetCachedInt(inputNode, "value");
-                        value = EditorGUILayout.IntField(label, value);
-                        if (EditorGUI.EndChangeCheck()) {
-                            graphmesh.outputCache.Cache(inputNode, value, "value");
-                            NodeEditor.onUpdateNode(inputNode);
+                    ExposedInput inputNode = inputNodes[i];
+                    NodePort port = inputNode.GetOutputByFieldName("value");
+                    NodePort targetPort = port.Connection;
+                    Node targetNode = targetPort.node;
+                    SerializedObject targetSo = new SerializedObject(targetNode);
+                    SerializedProperty targetProperty = targetSo.FindProperty(targetPort.fieldName);
+                    EditorGUILayout.PropertyField(targetProperty, new GUIContent(inputNode.label), true);
+
+                    targetSo.ApplyModifiedProperties();
+
+                    if (EditorGUI.EndChangeCheck()) {
+
+                        object newValue = targetNode.GetType().GetField(targetProperty.propertyPath).GetValue(targetNode);
+                        //graphmesh.outputCache.Cache(inputNode, newValue, "value");
+                        for (int k = 1; k < port.ConnectionCount; k++) {
+                            targetPort = port.GetConnection(i);
+                            targetNode = targetPort.node;
+                            targetNode.GetType().GetField(targetProperty.propertyPath).SetValue(targetNode, newValue);
                         }
-                    }
-                    else if (type == typeof(float)) {
-                        float value = graphmesh.outputCache.GetCachedFloat(inputNode, "value");
-                        value = EditorGUILayout.FloatField(label, value);
-                        if (EditorGUI.EndChangeCheck()) {
-                            graphmesh.outputCache.Cache(inputNode, value, "value");
-                            NodeEditor.onUpdateNode(inputNode);
-                        }
-                    }
-                    else if (type == typeof(string)) {
-                        string value = graphmesh.outputCache.GetCachedString(inputNode, "value");
-                        value = EditorGUILayout.TextField(label, value);
-                        if (EditorGUI.EndChangeCheck()) {
-                            graphmesh.outputCache.Cache(inputNode, value, "value");
-                            NodeEditor.onUpdateNode(inputNode);
-                        }
-                    }
-                    else if (type == typeof(bool)) {
-                        bool value = graphmesh.outputCache.GetCachedBool(inputNode, "value");
-                        value = EditorGUILayout.Toggle(label, value);
-                        if (EditorGUI.EndChangeCheck()) {
-                            graphmesh.outputCache.Cache(inputNode, value, "value");
-                            NodeEditor.onUpdateNode(inputNode);
-                        }
-                    }
-                    else if (type.IsSubclassOf(typeof(Object)) || type == typeof(Object)) {
-                        Object value = graphmesh.outputCache.GetCachedObject(inputNode, "value");
-                        value = EditorGUILayout.ObjectField(label, value, type, true);
-                        if (EditorGUI.EndChangeCheck()) {
-                            graphmesh.outputCache.Cache(inputNode, value, "value");
-                            NodeEditor.onUpdateNode(inputNode);
-                        }
-                    }
-                    else {
-                        EditorGUI.BeginDisabledGroup(true);
-                        EditorGUILayout.LabelField(label, "Unsupported type ("+type.ToString()+")");
-                        EditorGUI.EndDisabledGroup();
-                        EditorGUI.EndChangeCheck();
+                        if (NodeEditor.onUpdateNode != null) NodeEditor.onUpdateNode(inputNode);
                     }
                 }
             }

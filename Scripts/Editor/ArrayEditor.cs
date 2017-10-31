@@ -6,34 +6,23 @@ namespace Graphmesh {
     [CustomNodeEditor(typeof(Array), "Graphmesh/Array")]
     public class ArrayEditor : NodeEditor {
 
-        protected override void OnBodyGUI(out Dictionary<NodePort, Vector2> portPositions) {
+        protected override void OnBodyGUI() {
             portPositions = new Dictionary<NodePort, Vector2>();
-            Array array = target as Array;
-            NodePort modelPort = array.GetInputByFieldName("input");
-            Vector2 portPos;
-            array.input = NodeEditorGUILayout.PortField("Model", array.input, typeof(ModelGroup), modelPort, false, out portPos) as ModelGroup;
-            portPositions.Add(modelPort, portPos);
+            Array arrayNode = target as Array;
 
-            NodePort outputPort = array.GetOutputByFieldName("output");
-            NodeEditorGUILayout.PortField("Output", null, typeof(List<Model>), outputPort, false, out portPos);
-            portPositions.Add(outputPort, portPos);
+            NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("input"), true);
+            NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("output"), true);
 
-            array.fitLength = NodeEditorGUILayout.Toggle("Fit Length", array.fitLength);
+            NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("fitLength"), true);
 
-            if (array.fitLength) {
-                NodePort lengthPort = array.GetInputByFieldName("length");
-				array.length = (float)NodeEditorGUILayout.PortField("Length", array.length, typeof(float), lengthPort, !lengthPort.IsConnected, out portPos);
-                portPositions.Add(lengthPort, portPos);
+            if (arrayNode.fitLength) {
+                NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("length"), true);
             } else {
-                NodePort countPort = array.GetInputByFieldName("count");
-                array.count = (int)NodeEditorGUILayout.PortField("Count", array.count, typeof(int), countPort, !countPort.IsConnected, out portPos);
-                portPositions.Add(countPort, portPos);
+                NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("count"), true);
             }
 
-			array.posOffset = NodeEditorGUILayout.Vector3Field("Pos Offset",array.posOffset);
-			array.rotOffset = NodeEditorGUILayout.Vector3Field("Rot Offset",array.rotOffset);
-
-			if (GUI.changed) NodeEditor.onUpdateNode(array);
+            NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("posOffset"), true);
+            NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("rotOffset"), true);
         }
     }
 }

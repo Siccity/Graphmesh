@@ -8,7 +8,6 @@ namespace Graphmesh {
     public class TRS : GraphmeshNode {
 
         [Input(ShowBackingValue.Never)] public ModelGroup input;
-        [Header("Offsets")]
         [Input] public Vector3 t;
         [Input] public Vector3 r;
         [Input] public Vector3 s = Vector3.one;
