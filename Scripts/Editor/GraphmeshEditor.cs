@@ -16,6 +16,8 @@ namespace Graphmesh {
             Bezier3DSplineEditor.onUpdateSpline += OnUpdateSpline;
             NodeEditor.onUpdateNode -= OnUpdateNode;
             NodeEditor.onUpdateNode += OnUpdateNode;
+            FFDBoxEditor.onUpdateFFD -= OnUpdateFFD;
+            FFDBoxEditor.onUpdateFFD += OnUpdateFFD;
         }
 
         public override void OnInspectorGUI() {
@@ -37,10 +39,18 @@ namespace Graphmesh {
                     ExposedInput inputNode = inputNodes[i];
                     NodePort port = inputNode.GetOutputByFieldName("value");
                     NodePort targetPort = port.Connection;
+                    if (targetPort == null) continue;
                     Node targetNode = targetPort.node;
                     SerializedObject targetSo = new SerializedObject(targetNode);
                     SerializedProperty targetProperty = targetSo.FindProperty(targetPort.fieldName);
-                    EditorGUILayout.PropertyField(targetProperty, new GUIContent(inputNode.label), true);
+                    if (inputNode.GetType().IsSubclassOf(typeof(Object))) {
+                        Object obj = graphmesh.outputCache.GetCachedObject(inputNode, "value");
+                        obj = EditorGUILayout.ObjectField(inputNode.label, obj, inputNode.GetOutputType(), true);
+                        if (EditorGUI.EndChangeCheck()) {
+                            graphmesh.outputCache.Cache(inputNode, obj, "value");
+                        }
+                        continue;
+                    } else EditorGUILayout.PropertyField(targetProperty, new GUIContent(inputNode.label), true);
 
                     targetSo.ApplyModifiedProperties();
 
@@ -75,6 +85,15 @@ namespace Graphmesh {
             Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh>();
             for (int i = 0; i < meshModifiers.Length; i++) {
                 if (meshModifiers[i].outputCache.Contains(spline)) {
+                    meshModifiers[i].Generate();
+                }
+            }
+        }
+
+        static void OnUpdateFFD(FFDBox ffd) {
+            Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh>();
+            for (int i = 0; i < meshModifiers.Length; i++) {
+                if (meshModifiers[i].outputCache.Contains(ffd)) {
                     meshModifiers[i].Generate();
                 }
             }
