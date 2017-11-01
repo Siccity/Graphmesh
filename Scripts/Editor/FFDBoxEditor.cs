@@ -21,14 +21,14 @@ namespace Graphmesh {
         void OnSceneGUI() {
             FFDBox ffd = target as FFDBox;
 
-            Vector3 l_000 = ffd.transform.TransformPoint(ffd.l_000);
-            Vector3 l_001 = ffd.transform.TransformPoint(ffd.l_001);
-            Vector3 l_010 = ffd.transform.TransformPoint(ffd.l_010);
-            Vector3 l_011 = ffd.transform.TransformPoint(ffd.l_011);
-            Vector3 l_100 = ffd.transform.TransformPoint(ffd.l_100);
-            Vector3 l_101 = ffd.transform.TransformPoint(ffd.l_101);
-            Vector3 l_110 = ffd.transform.TransformPoint(ffd.l_110);
-            Vector3 l_111 = ffd.transform.TransformPoint(ffd.l_111);
+            Vector3 l_000 = ffd.transform.TransformPoint(ffd.settings.v_000);
+            Vector3 l_001 = ffd.transform.TransformPoint(ffd.settings.v_001);
+            Vector3 l_010 = ffd.transform.TransformPoint(ffd.settings.v_010);
+            Vector3 l_011 = ffd.transform.TransformPoint(ffd.settings.v_011);
+            Vector3 l_100 = ffd.transform.TransformPoint(ffd.settings.v_100);
+            Vector3 l_101 = ffd.transform.TransformPoint(ffd.settings.v_101);
+            Vector3 l_110 = ffd.transform.TransformPoint(ffd.settings.v_110);
+            Vector3 l_111 = ffd.transform.TransformPoint(ffd.settings.v_111);
 
             Handles.DrawLine(l_000, l_001);
             Handles.DrawLine(l_000, l_010);
@@ -54,14 +54,14 @@ namespace Graphmesh {
             l_110 = Handles.PositionHandle(l_110, ffd.transform.rotation);
             l_111 = Handles.PositionHandle(l_111, ffd.transform.rotation);
 
-            ffd.l_000 = ffd.transform.InverseTransformPoint(l_000);
-            ffd.l_001 = ffd.transform.InverseTransformPoint(l_001);
-            ffd.l_010 = ffd.transform.InverseTransformPoint(l_010);
-            ffd.l_011 = ffd.transform.InverseTransformPoint(l_011);
-            ffd.l_100 = ffd.transform.InverseTransformPoint(l_100);
-            ffd.l_101 = ffd.transform.InverseTransformPoint(l_101);
-            ffd.l_110 = ffd.transform.InverseTransformPoint(l_110);
-            ffd.l_111 = ffd.transform.InverseTransformPoint(l_111);
+            ffd.settings.v_000 = ffd.transform.InverseTransformPoint(l_000);
+            ffd.settings.v_001 = ffd.transform.InverseTransformPoint(l_001);
+            ffd.settings.v_010 = ffd.transform.InverseTransformPoint(l_010);
+            ffd.settings.v_011 = ffd.transform.InverseTransformPoint(l_011);
+            ffd.settings.v_100 = ffd.transform.InverseTransformPoint(l_100);
+            ffd.settings.v_101 = ffd.transform.InverseTransformPoint(l_101);
+            ffd.settings.v_110 = ffd.transform.InverseTransformPoint(l_110);
+            ffd.settings.v_111 = ffd.transform.InverseTransformPoint(l_111);
             if (EditorGUI.EndChangeCheck()) {
                 if (onUpdateFFD != null) onUpdateFFD(ffd);
             }
