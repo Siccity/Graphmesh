@@ -93,7 +93,7 @@ namespace Graphmesh {
         }
 
         int LengthToCount (float length) {
-            return Mathf.FloorToInt (length / posOffset.magnitude);
+            return Mathf.CeilToInt (length / posOffset.magnitude);
         }
     }
 }
