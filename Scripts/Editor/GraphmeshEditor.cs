@@ -43,27 +43,29 @@ namespace Graphmesh {
                     Node targetNode = targetPort.node;
                     SerializedObject targetSo = new SerializedObject(targetNode);
                     SerializedProperty targetProperty = targetSo.FindProperty(targetPort.fieldName);
-                    if (inputNode.GetType().IsSubclassOf(typeof(Object))) {
+                    if (inputNode.GetOutputType().IsSubclassOf(typeof(Object))) {
                         Object obj = graphmesh.outputCache.GetCachedObject(inputNode, "value");
                         obj = EditorGUILayout.ObjectField(inputNode.label, obj, inputNode.GetOutputType(), true);
                         if (EditorGUI.EndChangeCheck()) {
                             graphmesh.outputCache.Cache(inputNode, obj, "value");
+                            if (NodeEditor.onUpdateNode != null) NodeEditor.onUpdateNode(inputNode);
                         }
-                        continue;
-                    } else EditorGUILayout.PropertyField(targetProperty, new GUIContent(inputNode.label), true);
 
-                    targetSo.ApplyModifiedProperties();
+                    } else {
+                        EditorGUILayout.PropertyField(targetProperty, new GUIContent(inputNode.label), true);
+                        targetSo.ApplyModifiedProperties();
 
-                    if (EditorGUI.EndChangeCheck()) {
+                        if (EditorGUI.EndChangeCheck()) {
 
-                        object newValue = targetNode.GetType().GetField(targetProperty.propertyPath).GetValue(targetNode);
-                        //graphmesh.outputCache.Cache(inputNode, newValue, "value");
-                        for (int k = 1; k < port.ConnectionCount; k++) {
-                            targetPort = port.GetConnection(i);
-                            targetNode = targetPort.node;
-                            targetNode.GetType().GetField(targetProperty.propertyPath).SetValue(targetNode, newValue);
+                            object newValue = targetNode.GetType().GetField(targetProperty.propertyPath).GetValue(targetNode);
+
+                            if (newValue is int) graphmesh.outputCache.Cache(inputNode, (int) newValue, "value");
+                            else if (newValue is string) graphmesh.outputCache.Cache(inputNode, (string) newValue, "value");
+                            else if (newValue is float) graphmesh.outputCache.Cache(inputNode, (float) newValue, "value");
+                            else if (newValue is bool) graphmesh.outputCache.Cache(inputNode, (bool) newValue, "value");
+
+                            if (NodeEditor.onUpdateNode != null) NodeEditor.onUpdateNode(inputNode);
                         }
-                        if (NodeEditor.onUpdateNode != null) NodeEditor.onUpdateNode(inputNode);
                     }
                 }
             }
