@@ -25,24 +25,24 @@ namespace Graphmesh {
             if (models == null) {
                 Debug.LogWarning("Error in mesh generation");
             } else {
-                ClearMesh();
                 if (models.Count == 1) ShowModel(gameObject, models[0]);
                 else ShowModels(models);
             }
         }
 
         private void ShowModel(GameObject target, Model model) {
-            MeshFilter filter = target.AddComponent<MeshFilter>();
+            MeshFilter filter = target.GetOrAddComponent<MeshFilter>();
             filter.mesh = model.mesh;
-            MeshRenderer renderer = target.AddComponent<MeshRenderer>();
+            MeshRenderer renderer = target.GetOrAddComponent<MeshRenderer>();
             renderer.materials = model.materials;
             if (model.colType == Model.ColliderType.Mesh) {
-                MeshCollider mcol = target.AddComponent<MeshCollider>();
+                MeshCollider mcol = target.GetOrAddComponent<MeshCollider>();
                 mcol.sharedMesh = model.meshCol;
                 mcol.convex = model.meshColConvex;
             }
         }
         private void ShowModels(List<Model> models) {
+            ClearMesh();
             for (int i = 0; i < models.Count; i++) {
                 GameObject go = new GameObject("mesh output " + i);
                 go.transform.parent = transform;
@@ -95,6 +95,12 @@ namespace Graphmesh {
                 };
             }
             return meshes;
+        }
+
+        public static T GetOrAddComponent<T>(this GameObject target) where T : Component {
+            T t = target.GetComponent<T>();
+            if (t == null) t = target.AddComponent<T>();
+            return t;
         }
     }
 }
