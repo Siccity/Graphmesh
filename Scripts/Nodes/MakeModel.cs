@@ -15,6 +15,7 @@ namespace Graphmesh {
             Mesh mesh = GetInputByFieldName("mesh", this.mesh);
             Material material = GetInputByFieldName("material", this.material);
 
+            if (mesh == null) return new ModelGroup();
             //Fixme: Support for more than one material
             Model model = new Model(mesh.Copy(), new Material[] { material });
             return new ModelGroup() { model };
