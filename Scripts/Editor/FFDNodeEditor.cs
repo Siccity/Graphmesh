@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Graphmesh {
-    [CustomNodeEditor(typeof(FFD), "Graphmesh/FFD")]
+    [CustomNodeEditor(typeof(FFD))]
     public class FFDNodeEditor : NodeEditor {
         protected override void OnBodyGUI() {
             NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("input"));

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 namespace Graphmesh {
-    [CustomNodeEditor(typeof(Array), "Graphmesh/Array")]
+    [CustomNodeEditor(typeof(Array))]
     public class ArrayEditor : NodeEditor {
 
         protected override void OnBodyGUI() {
