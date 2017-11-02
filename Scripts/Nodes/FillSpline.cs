@@ -17,9 +17,9 @@ namespace Graphmesh {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-            Bezier3DSpline spline = GetInputByFieldName<Bezier3DSpline>("spline", this.spline);
-            Material material = GetInputByFieldName<Material>("material", this.material);
-            float resolution = GetInputByFieldName<float>("resolution", this.resolution);
+            Bezier3DSpline spline = GetInputValue<Bezier3DSpline>("spline", this.spline);
+            Material material = GetInputValue<Material>("material", this.material);
+            float resolution = GetInputValue<float>("resolution", this.resolution);
 
             if (spline != null) {
                 List<Vector2> points = new List<Vector2>();

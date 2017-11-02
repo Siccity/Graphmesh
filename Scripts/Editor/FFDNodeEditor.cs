@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 namespace Graphmesh {
     [CustomNodeEditor(typeof(FFD), "Graphmesh/FFD")]
@@ -22,9 +23,7 @@ namespace Graphmesh {
                 NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("v_110"));
                 NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("v_111"));
             }
-			var sp = serializedObject.FindProperty("output");
-			if (sp != null) NodeEditorGUILayout.PropertyField(sp);
-			else EditorGUILayout.LabelField("Na");
+            NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("output"));
         }
     }
 }

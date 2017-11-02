@@ -11,7 +11,7 @@ namespace Graphmesh {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-            GameObject template = GetInputByFieldName("template", this.template);
+            GameObject template = GetInputValue("template", this.template);
             if (template != null) return ModelsFromGameObjects(template.transform);
             else return new ModelGroup();
         }

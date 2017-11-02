@@ -18,10 +18,10 @@ namespace Graphmesh {
             if (o != null) return o;
 
             // Get inputs
-            ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
-            Vector3 t = GetInputByFieldName<Vector3>("t", this.t);
-            Vector3 r = GetInputByFieldName<Vector3>("r", this.r);
-            Vector3 s = GetInputByFieldName<Vector3>("s", this.s);
+            ModelGroup[] input = GetInputValues<ModelGroup>("input", this.input);
+            Vector3 t = GetInputValue<Vector3>("t", this.t);
+            Vector3 r = GetInputValue<Vector3>("r", this.r);
+            Vector3 s = GetInputValue<Vector3>("s", this.s);
 
             Matrix4x4 trs = Matrix4x4.TRS(t, Quaternion.Euler(r), s);
 

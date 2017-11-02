@@ -37,7 +37,7 @@ namespace Graphmesh {
                     //We do this by modifying one node field directly and then copying the result to the other nodes
                     EditorGUI.BeginChangeCheck();
                     ExposedInput inputNode = inputNodes[i];
-                    NodePort port = inputNode.GetOutputByFieldName("value");
+                    NodePort port = inputNode.GetOutputPort("value");
                     NodePort targetPort = port.Connection;
                     if (targetPort == null) continue;
                     Node targetNode = targetPort.node;

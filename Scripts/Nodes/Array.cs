@@ -18,13 +18,13 @@ namespace Graphmesh {
             object o = base.GetValue (port);
             if (o != null) return o;
 
-            ModelGroup[] input = GetInputsByFieldName<ModelGroup> ("input", this.input);
+            ModelGroup[] input = GetInputValues<ModelGroup> ("input", this.input);
             ModelGroup output = new ModelGroup ();
 
             if (input == null) return output;
 
-            float length = GetInputByFieldName<float> ("length", this.length);
-            int count = GetInputByFieldName<int> ("count", this.count);
+            float length = GetInputValue<float> ("length", this.length);
+            int count = GetInputValue<int> ("count", this.count);
             if (fitLength) count = GetCount (length);
 
             // Loop through input model groups

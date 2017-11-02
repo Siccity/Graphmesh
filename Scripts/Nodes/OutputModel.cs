@@ -8,7 +8,7 @@ namespace Graphmesh {
         [Input(ShowBackingValue.Never)] public ModelGroup input;
 
         public List<Model> GetModels() {
-            NodePort modelPort = GetInputByFieldName("input");
+            NodePort modelPort = GetInputPort("input");
             return GetValue(modelPort) as List<Model>;
         }
 
@@ -17,7 +17,7 @@ namespace Graphmesh {
             if (o != null) return o;
 
             // Get inputs
-            ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
+            ModelGroup[] input = GetInputValues<ModelGroup>("input", this.input);
             ModelGroup output = new ModelGroup();
 
             if (input == null) return output;

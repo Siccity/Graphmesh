@@ -19,8 +19,8 @@ namespace Graphmesh {
         }
 
         public System.Type GetOutputType() {
-            NodePort port = GetOutputByFieldName("value");
-            if (port != null && port.IsConnected) return port.Connection.type;
+            NodePort port = GetOutputPort("value");
+            if (port != null && port.IsConnected) return port.Connection.ValueType;
             else return null;
         }
     }

@@ -14,8 +14,8 @@ namespace Graphmesh {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-            ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
-            Bezier3DSpline spline = GetInputByFieldName<Bezier3DSpline>("spline", this.spline);
+            ModelGroup[] input = GetInputValues<ModelGroup>("input", this.input);
+            Bezier3DSpline spline = GetInputValue<Bezier3DSpline>("spline", this.spline);
             ModelGroup output = new ModelGroup();
             if (input == null) return output;
 

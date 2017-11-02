@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 114321097876358692}
   - {fileID: 114057770197411388}
   - {fileID: 114264266371243250}
-  - {fileID: 114684122484083430}
+  - {fileID: 114575612352540914}
 --- !u!114 &114057770197411388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,15 +33,20 @@ MonoBehaviour:
   m_Name: ExposedInput
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -400.66666, y: -11.0996275}
-  inputs: []
-  outputs:
-  - node: {fileID: 114057770197411388}
-    _fieldName: value
-    connections:
-    - fieldName: material
-      node: {fileID: 114632556315273236}
-    _direction: 1
+  position: {x: -400.72665, y: -105.959625}
+  ports:
+    keys:
+    - value
+    values:
+    - _fieldName: value
+      _node: {fileID: 114057770197411388}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: material
+        node: {fileID: 114632556315273236}
+      _direction: 1
+      _dynamic: 0
   label: Material
   value: 0
 --- !u!114 &114077181132956892
@@ -56,16 +61,21 @@ MonoBehaviour:
   m_Name: ExposedInput
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -194.38507, y: -222.02481}
-  inputs: []
-  outputs:
-  - node: {fileID: 114077181132956892}
-    _fieldName: value
-    connections:
-    - fieldName: distance
-      node: {fileID: 114611053987445236}
-    _direction: 1
-  label: Dist
+  position: {x: -396.45508, y: -13.9048}
+  ports:
+    keys:
+    - value
+    values:
+    - _fieldName: value
+      _node: {fileID: 114077181132956892}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: distance
+        node: {fileID: 114611053987445236}
+      _direction: 1
+      _dynamic: 0
+  label: Thickness
   value: 0
 --- !u!114 &114164213531793386
 MonoBehaviour:
@@ -79,15 +89,20 @@ MonoBehaviour:
   m_Name: OutputModel
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 717.9139, y: 4.6432266}
-  inputs:
-  - node: {fileID: 114164213531793386}
-    _fieldName: input
-    connections:
-    - fieldName: output
-      node: {fileID: 114991528711891516}
-    _direction: 0
-  outputs: []
+  position: {x: 959.9139, y: -10.356773}
+  ports:
+    keys:
+    - input
+    values:
+    - _fieldName: input
+      _node: {fileID: 114164213531793386}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 114575612352540914}
+      _direction: 0
+      _dynamic: 0
 --- !u!114 &114264266371243250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,34 +116,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
   position: {x: 285, y: -64}
-  inputs:
-  - node: {fileID: 114264266371243250}
-    _fieldName: input
-    connections:
-    - fieldName: output
-      node: {fileID: 114611053987445236}
-    _direction: 0
-  - node: {fileID: 114264266371243250}
-    _fieldName: t
-    connections:
-    - fieldName: vector
-      node: {fileID: 114684122484083430}
-    _direction: 0
-  - node: {fileID: 114264266371243250}
-    _fieldName: r
-    connections: []
-    _direction: 0
-  - node: {fileID: 114264266371243250}
-    _fieldName: s
-    connections: []
-    _direction: 0
-  outputs:
-  - node: {fileID: 114264266371243250}
-    _fieldName: output
-    connections:
-    - fieldName: input
-      node: {fileID: 114991528711891516}
-    _direction: 1
+  ports:
+    keys:
+    - input
+    - t
+    - r
+    - s
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 114264266371243250}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 114611053987445236}
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: t
+      _node: {fileID: 114264266371243250}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: r
+      _node: {fileID: 114264266371243250}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: s
+      _node: {fileID: 114264266371243250}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 114264266371243250}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 114991528711891516}
+      _direction: 1
+      _dynamic: 0
   t: {x: 0.5, y: 0, z: 0}
   r: {x: 0, y: 0, z: 0}
   s: {x: 1, y: 1, z: 1}
@@ -144,16 +178,21 @@ MonoBehaviour:
   m_Name: ExposedInput
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -416.79813, y: -117.77176}
-  inputs: []
-  outputs:
-  - node: {fileID: 114321097876358692}
-    _fieldName: value
-    connections:
-    - fieldName: spline
-      node: {fileID: 114632556315273236}
-    _direction: 1
-  label: Spline
+  position: {x: -405.90814, y: -202.47176}
+  ports:
+    keys:
+    - value
+    values:
+    - _fieldName: value
+      _node: {fileID: 114321097876358692}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: spline
+        node: {fileID: 114632556315273236}
+      _direction: 1
+      _dynamic: 0
+  label: Shape
   value: 0
 --- !u!114 &114391578733678660
 MonoBehaviour:
@@ -190,6 +229,42 @@ MonoBehaviour:
   b: 0.5
   result: 0
   mathType: 1
+--- !u!114 &114575612352540914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe2596c8165d864791244ef1b563be5, type: 3}
+  m_Name: MergeModels
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 736, y: -45}
+  ports:
+    keys:
+    - input
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 114575612352540914}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 114991528711891516}
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 114575612352540914}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 114164213531793386}
+      _direction: 1
+      _dynamic: 0
 --- !u!114 &114611053987445236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,27 +278,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
   position: {x: 37.5365, y: -98.17533}
-  inputs:
-  - node: {fileID: 114611053987445236}
-    _fieldName: input
-    connections:
-    - fieldName: output
-      node: {fileID: 114632556315273236}
-    _direction: 0
-  - node: {fileID: 114611053987445236}
-    _fieldName: distance
-    connections:
-    - fieldName: value
-      node: {fileID: 114077181132956892}
-    _direction: 0
-  outputs:
-  - node: {fileID: 114611053987445236}
-    _fieldName: output
-    connections:
-    - fieldName: input
-      node: {fileID: 114264266371243250}
-    _direction: 1
-  distance: 1.2966709
+  ports:
+    keys:
+    - input
+    - distance
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 114611053987445236}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 114632556315273236}
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: distance
+      _node: {fileID: 114611053987445236}
+      _typeQualifiedName: System.Single, mscorlib, Version=2.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: value
+        node: {fileID: 114077181132956892}
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 114611053987445236}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 114264266371243250}
+      _direction: 1
+      _dynamic: 0
+  distance: 1.1
 --- !u!114 &114632556315273236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,73 +324,51 @@ MonoBehaviour:
   m_Name: FillSpline
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -189.80803, y: -80.360115}
-  inputs:
-  - node: {fileID: 114632556315273236}
-    _fieldName: spline
-    connections:
-    - fieldName: value
-      node: {fileID: 114321097876358692}
-    _direction: 0
-  - node: {fileID: 114632556315273236}
-    _fieldName: material
-    connections:
-    - fieldName: value
-      node: {fileID: 114057770197411388}
-    _direction: 0
-  - node: {fileID: 114632556315273236}
-    _fieldName: resolution
-    connections: []
-    _direction: 0
-  outputs:
-  - node: {fileID: 114632556315273236}
-    _fieldName: output
-    connections:
-    - fieldName: input
-      node: {fileID: 114611053987445236}
-    _direction: 1
+  position: {x: -178.91803, y: -161.43011}
+  ports:
+    keys:
+    - spline
+    - material
+    - resolution
+    - output
+    values:
+    - _fieldName: spline
+      _node: {fileID: 114632556315273236}
+      _typeQualifiedName: Bezier3DSpline, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: value
+        node: {fileID: 114321097876358692}
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: material
+      _node: {fileID: 114632556315273236}
+      _typeQualifiedName: UnityEngine.Material, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: value
+        node: {fileID: 114057770197411388}
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: resolution
+      _node: {fileID: 114632556315273236}
+      _typeQualifiedName: System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 114632556315273236}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 114611053987445236}
+      _direction: 1
+      _dynamic: 0
   spline: {fileID: 0}
   material: {fileID: 2100000, guid: 7f78e11322b97b544ace22b6bd0a824c, type: 2}
   resolution: 10
---- !u!114 &114684122484083430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05559f4106850df4ab41776666216480, type: 3}
-  m_Name: Vector
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 34, y: 37}
-  inputs:
-  - node: {fileID: 114684122484083430}
-    _fieldName: x
-    connections: []
-    _direction: 0
-  - node: {fileID: 114684122484083430}
-    _fieldName: y
-    connections:
-    - fieldName: result
-      node: {fileID: 0}
-    _direction: 0
-  - node: {fileID: 114684122484083430}
-    _fieldName: z
-    connections: []
-    _direction: 0
-  outputs:
-  - node: {fileID: 114684122484083430}
-    _fieldName: vector
-    connections:
-    - fieldName: t
-      node: {fileID: 114264266371243250}
-    _direction: 1
-  x: 0
-  y: 0
-  z: 0
-  vector: {x: 0, y: 0, z: 0}
 --- !u!114 &114831188555162306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,7 +398,7 @@ MonoBehaviour:
     _fieldName: result
     connections:
     - fieldName: y
-      node: {fileID: 114684122484083430}
+      node: {fileID: 0}
     _direction: 1
   a: 0
   b: 0.5
@@ -351,22 +417,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
   position: {x: 501, y: -20.692543}
-  inputs:
-  - node: {fileID: 114991528711891516}
-    _fieldName: input
-    connections:
-    - fieldName: output
-      node: {fileID: 114264266371243250}
-    _direction: 0
-  - node: {fileID: 114991528711891516}
-    _fieldName: convex
-    connections: []
-    _direction: 0
-  outputs:
-  - node: {fileID: 114991528711891516}
-    _fieldName: output
-    connections:
-    - fieldName: input
-      node: {fileID: 114164213531793386}
-    _direction: 1
+  ports:
+    keys:
+    - input
+    - convex
+    - output
+    values:
+    - _fieldName: input
+      _node: {fileID: 114991528711891516}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: output
+        node: {fileID: 114264266371243250}
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: convex
+      _node: {fileID: 114991528711891516}
+      _typeQualifiedName: System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _dynamic: 0
+    - _fieldName: output
+      _node: {fileID: 114991528711891516}
+      _typeQualifiedName: Graphmesh.ModelGroup, Assembly-CSharp-firstpass, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: input
+        node: {fileID: 114575612352540914}
+      _direction: 1
+      _dynamic: 0
   convex: 1

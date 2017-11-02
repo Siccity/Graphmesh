@@ -13,7 +13,7 @@ namespace Graphmesh {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-			Bezier3DSpline spline = GetInputByFieldName<Bezier3DSpline>("spline", this.spline);
+			Bezier3DSpline spline = GetInputValue<Bezier3DSpline>("spline", this.spline);
 			if (spline == null) return 0;
 
             if (port.fieldName == "length") {

@@ -12,7 +12,7 @@ namespace Graphmesh {
             if (o != null) return o;
 
             // Get inputs
-            ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
+            ModelGroup[] input = GetInputValues<ModelGroup>("input", this.input);
 
             ModelGroup output = new ModelGroup();
 

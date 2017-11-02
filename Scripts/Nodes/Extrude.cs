@@ -15,8 +15,8 @@ namespace Graphmesh {
             if (o != null) return o;
 
             //Get inputs
-            ModelGroup[] input = GetInputsByFieldName<ModelGroup> ("input", this.input);
-            float distance = GetInputByFieldName<float> ("distance", this.distance);
+            ModelGroup[] input = GetInputValues<ModelGroup> ("input", this.input);
+            float distance = GetInputValue<float> ("distance", this.distance);
 
             ModelGroup output = new ModelGroup ();
 

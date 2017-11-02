@@ -12,11 +12,11 @@ namespace Graphmesh {
         public override object GetValue(NodePort port) {
             if (!currentOutputCache.IsCached(port.node, port.fieldName)) return null;
             object output = null;
-            if (port.type == typeof(int)) output = currentOutputCache.GetCachedInt(this, port.fieldName);
-            else if (port.type == typeof(float)) output = currentOutputCache.GetCachedFloat(this, port.fieldName);
-            else if (port.type == typeof(bool)) output = currentOutputCache.GetCachedBool(this, port.fieldName);
-            else if (port.type == typeof(string)) output = currentOutputCache.GetCachedString(this, port.fieldName);
-            else if (port.type.IsSubclassOf(typeof(Object)) || port.type == typeof(Object)) output = currentOutputCache.GetCachedObject(this, port.fieldName);
+            if (port.ValueType == typeof(int)) output = currentOutputCache.GetCachedInt(this, port.fieldName);
+            else if (port.ValueType == typeof(float)) output = currentOutputCache.GetCachedFloat(this, port.fieldName);
+            else if (port.ValueType == typeof(bool)) output = currentOutputCache.GetCachedBool(this, port.fieldName);
+            else if (port.ValueType == typeof(string)) output = currentOutputCache.GetCachedString(this, port.fieldName);
+            else if (port.ValueType.IsSubclassOf(typeof(Object)) || port.ValueType == typeof(Object)) output = currentOutputCache.GetCachedObject(this, port.fieldName);
             //Try to return a cached object
             if (output != null) return output;
             //If no cached object could be returned, generate one

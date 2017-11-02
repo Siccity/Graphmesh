@@ -13,8 +13,8 @@ namespace Graphmesh {
             if (o != null) return o;
 
             // Get inputs
-            ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
-            bool convex = GetInputByFieldName<bool>("convex", this.convex);
+            ModelGroup[] input = GetInputValues<ModelGroup>("input", this.input);
+            bool convex = GetInputValue<bool>("convex", this.convex);
             ModelGroup output = new ModelGroup();
 
             // Loop through input model groups

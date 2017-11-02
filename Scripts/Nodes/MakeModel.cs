@@ -12,8 +12,8 @@ namespace Graphmesh {
             object o = base.GetValue(port);
             if (o != null) return o;
 
-            Mesh mesh = GetInputByFieldName("mesh", this.mesh);
-            Material material = GetInputByFieldName("material", this.material);
+            Mesh mesh = GetInputValue("mesh", this.mesh);
+            Material material = GetInputValue("material", this.material);
 
             if (mesh == null) return new ModelGroup();
             //Fixme: Support for more than one material

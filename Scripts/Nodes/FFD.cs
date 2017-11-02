@@ -15,19 +15,18 @@ namespace Graphmesh {
         [Input] public Vector3 v_110 = new Vector3(1, 1, 0);
         [Input] public Vector3 v_111 = new Vector3(1, 1, 1);
         [Output] public ModelGroup output;
-        [Output] public string s;
 
         public override object GetValue(NodePort port) {
             object o = base.GetValue(port);
             if (o != null) return o;
 
             //Get inputs
-            ModelGroup[] input = GetInputsByFieldName<ModelGroup>("input", this.input);
+            ModelGroup[] input = GetInputValues<ModelGroup>("input", this.input);
 
             Vector3 v_000, v_001, v_010, v_011, v_100, v_101, v_110, v_111;
 
             if (reference) {
-                FFDBox ffdBox = GetInputByFieldName<FFDBox>("ffdBox", this.ffdBox);
+                FFDBox ffdBox = GetInputValue<FFDBox>("ffdBox", this.ffdBox);
                 FFDBox.FFDBoxSettings ffdBoxSettings = FFDBox.FFDBoxSettings.Box;
                 if (ffdBox != null) ffdBoxSettings = ffdBox.settings;
                 v_000 = ffdBoxSettings.v_000;
@@ -39,14 +38,14 @@ namespace Graphmesh {
                 v_110 = ffdBoxSettings.v_110;
                 v_111 = ffdBoxSettings.v_111;
             } else {
-                v_000 = GetInputByFieldName<Vector3>("v_000", this.v_000);
-                v_001 = GetInputByFieldName<Vector3>("v_001", this.v_001);
-                v_010 = GetInputByFieldName<Vector3>("v_010", this.v_010);
-                v_011 = GetInputByFieldName<Vector3>("v_011", this.v_011);
-                v_100 = GetInputByFieldName<Vector3>("v_100", this.v_100);
-                v_101 = GetInputByFieldName<Vector3>("v_101", this.v_101);
-                v_110 = GetInputByFieldName<Vector3>("v_110", this.v_110);
-                v_111 = GetInputByFieldName<Vector3>("v_111", this.v_111);
+                v_000 = GetInputValue<Vector3>("v_000", this.v_000);
+                v_001 = GetInputValue<Vector3>("v_001", this.v_001);
+                v_010 = GetInputValue<Vector3>("v_010", this.v_010);
+                v_011 = GetInputValue<Vector3>("v_011", this.v_011);
+                v_100 = GetInputValue<Vector3>("v_100", this.v_100);
+                v_101 = GetInputValue<Vector3>("v_101", this.v_101);
+                v_110 = GetInputValue<Vector3>("v_110", this.v_110);
+                v_111 = GetInputValue<Vector3>("v_111", this.v_111);
             }
 
             ModelGroup output = new ModelGroup();
