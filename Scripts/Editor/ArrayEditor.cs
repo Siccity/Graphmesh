@@ -6,7 +6,7 @@ namespace Graphmesh {
     [CustomNodeEditor(typeof(Array))]
     public class ArrayEditor : NodeEditor {
 
-        protected override void OnBodyGUI() {
+        public override void OnBodyGUI() {
             portPositions = new Dictionary<NodePort, Vector2>();
             Array arrayNode = target as Array;
 

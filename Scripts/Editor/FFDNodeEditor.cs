@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Graphmesh {
     [CustomNodeEditor(typeof(FFD))]
     public class FFDNodeEditor : NodeEditor {
-        protected override void OnBodyGUI() {
+        public override void OnBodyGUI() {
             NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("input"));
             NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("reference"));
             bool reference = serializedObject.FindProperty("reference").boolValue;
