@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using XNode;
 
 namespace Graphmesh {
     public class FFD : GraphmeshNode {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using XNode;
 
 namespace Graphmesh {
     public class FillSpline : GraphmeshNode {
@@ -48,8 +48,7 @@ namespace Graphmesh {
                 Material[] mats = new Material[] { material };
                 output.Add(new Model(mesh, mats));
                 return output;
-            }
-            else return null;
+            } else return null;
         }
 
         public int[] Triangulate(List<Vector2> points) {

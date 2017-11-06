@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XNode;
+using XNodeEditor;
 
 namespace Graphmesh {
     [CustomNodeEditor(typeof(FFD))]

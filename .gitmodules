@@ -1,6 +1,6 @@
 [submodule "Submodules/Bezier3D"]
 	path = Submodules/Bezier3D
 	url = https://github.com/Siccity/Bezier3D.git
-[submodule "Submodules/UnityNodeEditorCore"]
-	path = Submodules/UnityNodeEditorCore
-	url = https://github.com/Siccity/UnityNodeEditorCore.git
+[submodule "Submodules/xNode"]
+	path = Submodules/xNode
+	url = https://github.com/Siccity/xNode.git

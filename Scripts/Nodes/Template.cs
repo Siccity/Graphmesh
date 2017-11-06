@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using XNode;
 
 namespace Graphmesh {
     public class Template : GraphmeshNode {
-        
+
         [Input] public GameObject template;
         [Output] public ModelGroup output;
 

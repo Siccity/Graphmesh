@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using XNode;
 
 namespace Graphmesh {
     public class FollowSpline : GraphmeshNode {

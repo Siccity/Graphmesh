@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using XNode;
+using XNodeEditor;
+
 namespace Graphmesh {
     [CustomNodeEditor(typeof(Array))]
     public class ArrayEditor : NodeEditor {
