@@ -4,6 +4,6 @@ using UnityEngine;
 using XNode;
 
 [CreateAssetMenu(menuName = "Graphmesh Graph", fileName = "New Graphmesh Graph")]
-public class GraphmeshNodeGraph : NodeGraph {
-
+public class GraphmeshGraph : NodeGraph {
+    
 }

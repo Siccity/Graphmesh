@@ -26,7 +26,7 @@ namespace Graphmesh {
 
             Graphmesh graphmesh = target as Graphmesh;
 
-            graphmesh.nodeGraph = EditorGUILayout.ObjectField("Node Graph", graphmesh.nodeGraph, typeof(GraphmeshNodeGraph), true) as GraphmeshNodeGraph;
+            graphmesh.nodeGraph = EditorGUILayout.ObjectField("Node Graph", graphmesh.nodeGraph, typeof(GraphmeshGraph), true) as GraphmeshGraph;
 
             GUILayout.Space(20);
 
