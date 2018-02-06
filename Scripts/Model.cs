@@ -19,7 +19,7 @@ namespace Graphmesh {
             meshCol = model.meshCol;
             meshColConvex = model.meshColConvex;
         }
-        
+
         public Model(Mesh mesh, Material[] materials) {
             this.mesh = mesh;
             this.materials = materials;
@@ -100,7 +100,12 @@ namespace Graphmesh {
 
             Mesh mesh = new Mesh();
             mesh.CombineMeshes(finalCombines, false);
-            return new Model(mesh, submeshMaterials);
+            Model m0 = models[0];
+            Model m = new Model(m0) {
+                mesh = mesh,
+                materials = submeshMaterials
+            };
+            return m;
         }
 
         public int GetMaterialSubmeshIndex(Material material) {
