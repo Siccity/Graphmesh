@@ -93,7 +93,7 @@ namespace Graphmesh {
             mesh.tangents = tan;
 #endif
             sw.Stop();
-            Debug.LogFormat("FollowSpline Inner loop {0} ticks, vertex count {1}", sw.ElapsedTicks, mesh.vertexCount);
+            //Debug.LogFormat("FollowSpline Inner loop {0} ticks, vertex count {1}", sw.ElapsedTicks, mesh.vertexCount);
         }
 
         #region Inner Loop helper methods, readability sacrificed for performance
