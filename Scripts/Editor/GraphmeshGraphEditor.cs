@@ -6,8 +6,8 @@ using XNodeEditor;
 [CustomNodeGraphEditor(typeof(GraphmeshGraph))]
 public class GraphmeshGraphEditor : NodeGraphEditor {
 
-	public override string GetNodePath(System.Type type) {
-		if (type.Namespace == "Graphmesh") return base.GetNodePath(type).Replace("Graphmesh/","");
+	public override string GetNodeMenuName(System.Type type) {
+		if (type.Namespace == "Graphmesh") return base.GetNodeMenuName(type).Replace("Graphmesh/","");
 		else return null;
 	}
 }
