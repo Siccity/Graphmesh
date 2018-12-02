@@ -11,7 +11,8 @@ namespace Graphmesh {
 
         public override object GetValue(NodePort port) {
             System.Type type = GetOutputType();
-            if (type == typeof(int)) return currentOutputCache.GetCachedInt(this, "value");
+            if (type == null) return null;
+            else if (type == typeof(int)) return currentOutputCache.GetCachedInt(this, "value");
             else if (type == typeof(float)) return currentOutputCache.GetCachedFloat(this, "value");
             else if (type == typeof(bool)) return currentOutputCache.GetCachedBool(this, "value");
             else if (type == typeof(string)) return currentOutputCache.GetCachedString(this, "value");

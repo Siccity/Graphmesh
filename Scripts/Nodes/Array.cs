@@ -39,6 +39,8 @@ namespace Graphmesh {
 
                     //Loop through model submeshes
                     for (int g = 0; g < model.mesh.subMeshCount; g++) {
+                        if (count < 1) continue;
+
                         //Create a CombineInstance array for the submesh
                         CombineInstance[] submeshCombines = new CombineInstance[count];
 
