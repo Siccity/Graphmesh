@@ -6,7 +6,7 @@ using XNode;
 namespace Graphmesh {
     public class Graphmesh : MonoBehaviour {
         /// <summary> NodeGraph to use for generating the mesh </summary>
-        public NodeGraph nodeGraph;
+        public GraphmeshGraph graph;
         /// <summary> Automatically generated and managed. Reuses node outputs. </summary>
         public NodeCache outputCache = new NodeCache();
 
@@ -14,7 +14,7 @@ namespace Graphmesh {
         public void Generate() {
             //We traverse backwards
 
-            OutputModel[] outputNodes = nodeGraph.nodes.FindAll(x => x.GetType() == typeof(OutputModel)).ConvertAll(x => x as OutputModel).ToArray();
+            OutputModel[] outputNodes = graph.nodes.FindAll(x => x.GetType() == typeof(OutputModel)).ConvertAll(x => x as OutputModel).ToArray();
 
             GraphmeshNode.currentOutputCache = outputCache;
 

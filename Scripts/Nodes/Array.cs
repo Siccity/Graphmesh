@@ -3,6 +3,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Modifiers/Array")]
     public class Array : GraphmeshNode {
 
         [Input (ShowBackingValue.Never)] public ModelGroup input;

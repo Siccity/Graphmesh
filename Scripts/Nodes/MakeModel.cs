@@ -3,6 +3,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Input/Make Model")]
     public class MakeModel : GraphmeshNode {
 
         [Input] public Mesh mesh;

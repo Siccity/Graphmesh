@@ -4,6 +4,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Generate/Mesh Collider")]
     public class GenerateMeshCollider : GraphmeshNode {
 
         [Input(ShowBackingValue.Never)] public ModelGroup input;

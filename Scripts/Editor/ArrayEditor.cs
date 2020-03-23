@@ -10,7 +10,6 @@ namespace Graphmesh {
     public class ArrayEditor : NodeEditor {
 
         public override void OnBodyGUI() {
-            portPositions = new Dictionary<NodePort, Vector2>();
             Array arrayNode = target as Array;
 
             NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("input"), true);

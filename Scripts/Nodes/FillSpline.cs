@@ -6,6 +6,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Spline/Fill")]
     public class FillSpline : GraphmeshNode {
 
         [Input] public Bezier3DSpline spline;

@@ -6,6 +6,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Modifiers/TRS")]
     public class TRS : GraphmeshNode {
 
         [Input(ShowBackingValue.Never)] public ModelGroup input;

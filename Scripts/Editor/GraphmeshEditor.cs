@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Graphmesh;
 using UnityEditor;
 using UnityEngine;
 using XNode;
 using XNodeEditor;
 
-namespace Graphmesh {
+namespace GraphmeshEditor {
     [InitializeOnLoad]
-    [CustomEditor(typeof(Graphmesh))]
+    [CustomEditor(typeof(Graphmesh.Graphmesh))]
     public class GraphmeshEditor : Editor {
 
         public static bool displayDefaultInspector;
@@ -24,16 +25,16 @@ namespace Graphmesh {
 
         public override void OnInspectorGUI() {
 
-            Graphmesh graphmesh = target as Graphmesh;
+            Graphmesh.Graphmesh graphmesh = target as Graphmesh.Graphmesh;
 
-            graphmesh.nodeGraph = EditorGUILayout.ObjectField("Node Graph", graphmesh.nodeGraph, typeof(GraphmeshGraph), true) as GraphmeshGraph;
+            graphmesh.graph = EditorGUILayout.ObjectField("Node Graph", graphmesh.graph, typeof(GraphmeshGraph), true) as GraphmeshGraph;
 
             GUILayout.Space(20);
 
             //Display exposed inputs
-            if (graphmesh.nodeGraph != null) {
+            if (graphmesh.graph != null) {
                 //Get all exposed inputs
-                ExposedInput[] inputNodes = graphmesh.nodeGraph.nodes.Where(x => x is ExposedInput).Select(x => x as ExposedInput).ToArray();
+                ExposedInput[] inputNodes = graphmesh.graph.nodes.Where(x => x is ExposedInput).Select(x => x as ExposedInput).ToArray();
 
                 for (int i = 0; i < inputNodes.Length; i++) {
                     //We do this by modifying one node field directly and then copying the result to the other nodes
@@ -86,7 +87,7 @@ namespace Graphmesh {
         }
 
         static void OnUpdateSpline(Bezier3DSpline spline) {
-            Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh>();
+            Graphmesh.Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh.Graphmesh>();
             for (int i = 0; i < meshModifiers.Length; i++) {
                 if (meshModifiers[i].outputCache.Contains(spline)) {
                     meshModifiers[i].Generate();
@@ -95,7 +96,7 @@ namespace Graphmesh {
         }
 
         static void OnUpdateFFD(FFDBox ffd) {
-            Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh>();
+            Graphmesh.Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh.Graphmesh>();
             for (int i = 0; i < meshModifiers.Length; i++) {
                 if (meshModifiers[i].outputCache.Contains(ffd)) {
                     meshModifiers[i].Generate();
@@ -104,9 +105,9 @@ namespace Graphmesh {
         }
 
         static void OnUpdateNode(Node node) {
-            Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh>();
+            Graphmesh.Graphmesh[] meshModifiers = FindObjectsOfType<Graphmesh.Graphmesh>();
             for (int i = 0; i < meshModifiers.Length; i++) {
-                if (meshModifiers[i].nodeGraph == node.graph) {
+                if (meshModifiers[i].graph == node.graph) {
                     meshModifiers[i].Generate();
                 }
             }

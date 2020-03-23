@@ -3,6 +3,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Input/Template")]
     public class Template : GraphmeshNode {
 
         [Input] public GameObject template;

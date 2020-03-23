@@ -5,6 +5,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Modifiers/Flip Normals")]
     public class FlipNormals : GraphmeshNode {
 
         [Input(ShowBackingValue.Never)] public ModelGroup input;

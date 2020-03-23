@@ -4,6 +4,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Spline/Data")]
     public class SplineData : GraphmeshNode {
 
         [Input] public Bezier3DSpline spline;

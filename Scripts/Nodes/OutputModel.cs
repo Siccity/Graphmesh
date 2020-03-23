@@ -4,6 +4,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Output/Output")]
     public class OutputModel : GraphmeshNode {
 
         [Input(ShowBackingValue.Never)] public ModelGroup input;

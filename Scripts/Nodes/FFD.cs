@@ -2,6 +2,7 @@
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Modifiers/FFD Box")]
     public class FFD : GraphmeshNode {
 
         [Input] public ModelGroup input;

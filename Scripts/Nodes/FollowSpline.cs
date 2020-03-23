@@ -3,6 +3,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Modifiers/Follow Spline")]
     public class FollowSpline : GraphmeshNode {
 
         [Input(ShowBackingValue.Never)] public ModelGroup input;

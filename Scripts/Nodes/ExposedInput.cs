@@ -4,6 +4,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Input/Exposed Input")]
     public class ExposedInput : GraphmeshNode {
 
         public string label = "Unnamed";

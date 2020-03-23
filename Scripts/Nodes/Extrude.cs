@@ -5,6 +5,7 @@ using UnityEngine;
 using XNode;
 
 namespace Graphmesh {
+    [CreateNodeMenu("Modifiers/Extrude")]
     public class Extrude : GraphmeshNode {
 
         [Input(ShowBackingValue.Never)] public ModelGroup input;
